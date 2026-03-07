@@ -1,0 +1,223 @@
+backend:
+  name: github
+  repo: OWNER/REPO_NAME  # À remplacer par le vrai repo GitHub (ex: raphaelpernet/taverne-des-rois)
+  branch: main
+  base_url: https://api.netlify.com  # Ou votre propre proxy OAuth
+
+media_folder: "assets/images"
+public_folder: "/assets/images"
+
+locale: "fr"
+
+collections:
+  - name: "site"
+    label: "Contenu du site"
+    files:
+      - name: "content"
+        label: "Tout le contenu"
+        file: "content/site.json"
+        format: "json"
+        fields:
+          # ===== HERO =====
+          - label: "Section Hero (Accueil)"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Image de fond", name: "background_image", widget: "image" }
+              - { label: "Logo", name: "logo", widget: "image" }
+              - { label: "Titre (ligne 1)", name: "title_line1", widget: "string" }
+              - { label: "Titre (ligne 2, en doré)", name: "title_line2", widget: "string" }
+              - { label: "Sous-titre", name: "subtitle", widget: "text" }
+              - { label: "URL de réservation (Dish)", name: "reservation_url", widget: "string" }
+              - { label: "Texte bouton réservation", name: "reservation_text", widget: "string" }
+              - { label: "Texte bouton carte", name: "menu_text", widget: "string" }
+
+          # ===== RESTAURANT =====
+          - label: "Section Restaurant"
+            name: "restaurant"
+            widget: "object"
+            fields:
+              - { label: "Sous-titre", name: "subtitle", widget: "string" }
+              - { label: "Titre", name: "title", widget: "string" }
+              - label: "Paragraphes"
+                name: "paragraphs"
+                widget: "list"
+                field: { label: "Paragraphe", name: "paragraph", widget: "text" }
+              - { label: "Image", name: "image", widget: "image" }
+
+          # ===== GALERIE =====
+          - label: "Section Galerie"
+            name: "gallery"
+            widget: "object"
+            fields:
+              - { label: "Sous-titre", name: "subtitle", widget: "string" }
+              - { label: "Titre", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "string" }
+              - label: "Images"
+                name: "images"
+                widget: "list"
+                fields:
+                  - { label: "Image", name: "src", widget: "image" }
+                  - { label: "Texte alternatif", name: "alt", widget: "string" }
+
+          # ===== ACTUALITÉS =====
+          - label: "Section Actualités"
+            name: "actualites"
+            widget: "object"
+            fields:
+              - { label: "Sous-titre", name: "subtitle", widget: "string" }
+              - { label: "Titre", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - label: "Événements"
+                name: "events"
+                widget: "list"
+                fields:
+                  - { label: "Image", name: "image", widget: "image" }
+                  - { label: "Jour (ex: 14)", name: "date_day", widget: "string" }
+                  - { label: "Mois (ex: Mar)", name: "date_month", widget: "string" }
+                  - { label: "Titre", name: "title", widget: "string" }
+                  - { label: "Description", name: "description", widget: "text" }
+
+          # ===== PLAT DU JOUR =====
+          - label: "Menu — Plat du Jour"
+            name: "menu_plat_du_jour"
+            widget: "object"
+            fields:
+              - label: "Le Midi"
+                name: "midi"
+                widget: "object"
+                fields:
+                  - label: "Entrée du jour"
+                    name: "entree"
+                    widget: "object"
+                    fields:
+                      - { label: "Nom", name: "name", widget: "string" }
+                      - { label: "Prix", name: "price", widget: "string" }
+                  - label: "Plat du jour"
+                    name: "plat"
+                    widget: "object"
+                    fields:
+                      - { label: "Nom", name: "name", widget: "string" }
+                      - { label: "Prix", name: "price", widget: "string" }
+                  - label: "Dessert du jour"
+                    name: "dessert"
+                    widget: "object"
+                    fields:
+                      - { label: "Nom", name: "name", widget: "string" }
+                      - { label: "Prix", name: "price", widget: "string" }
+                  - label: "Cocktail du jour"
+                    name: "cocktail"
+                    widget: "object"
+                    fields:
+                      - { label: "Nom", name: "name", widget: "string" }
+                      - { label: "Prix", name: "price", widget: "string" }
+              - label: "Le Soir"
+                name: "soir"
+                widget: "object"
+                fields:
+                  - label: "Entrée du jour"
+                    name: "entree"
+                    widget: "object"
+                    fields:
+                      - { label: "Nom", name: "name", widget: "string" }
+                      - { label: "Prix", name: "price", widget: "string" }
+                  - label: "Plat du jour"
+                    name: "plat"
+                    widget: "object"
+                    fields:
+                      - { label: "Nom", name: "name", widget: "string" }
+                      - { label: "Prix", name: "price", widget: "string" }
+                  - label: "Dessert du jour"
+                    name: "dessert"
+                    widget: "object"
+                    fields:
+                      - { label: "Nom", name: "name", widget: "string" }
+                      - { label: "Prix", name: "price", widget: "string" }
+                  - label: "Cocktail du jour"
+                    name: "cocktail"
+                    widget: "object"
+                    fields:
+                      - { label: "Nom", name: "name", widget: "string" }
+                      - { label: "Prix", name: "price", widget: "string" }
+              - label: "Formules"
+                name: "formules"
+                widget: "list"
+                fields:
+                  - { label: "Nom", name: "name", widget: "string" }
+                  - { label: "Description", name: "description", widget: "string" }
+                  - { label: "Prix", name: "price", widget: "string" }
+                  - { label: "Populaire ?", name: "popular", widget: "boolean", default: false }
+
+          # ===== MENU ENTRÉES =====
+          - label: "Menu — Entrées"
+            name: "menu_entrees"
+            widget: "list"
+            fields:
+              - { label: "Nom de catégorie", name: "category", widget: "string" }
+              - { label: "Icône FontAwesome (ex: fa-leaf)", name: "icon", widget: "string" }
+              - { label: "Sous-titre (optionnel)", name: "subtitle", widget: "string", required: false }
+              - label: "Items"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Étiquette", name: "label", widget: "string" }
+                  - { label: "Nom & description", name: "name", widget: "string" }
+                  - { label: "Prix", name: "price", widget: "string" }
+
+          # ===== MENU PLATS =====
+          - label: "Menu — Plats"
+            name: "menu_plats"
+            widget: "list"
+            fields:
+              - { label: "Nom de catégorie", name: "category", widget: "string" }
+              - { label: "Icône FontAwesome (ex: fa-hamburger)", name: "icon", widget: "string" }
+              - { label: "Sous-titre (optionnel)", name: "subtitle", widget: "string", required: false }
+              - label: "Items"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Étiquette", name: "label", widget: "string" }
+                  - { label: "Nom & description", name: "name", widget: "string" }
+                  - { label: "Prix", name: "price", widget: "string" }
+
+          # ===== MENU DESSERTS =====
+          - label: "Menu — Desserts"
+            name: "menu_desserts"
+            widget: "list"
+            fields:
+              - { label: "Nom de catégorie", name: "category", widget: "string" }
+              - { label: "Icône FontAwesome (ex: fa-birthday-cake)", name: "icon", widget: "string" }
+              - label: "Items"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Étiquette", name: "label", widget: "string" }
+                  - { label: "Nom & description", name: "name", widget: "string" }
+                  - { label: "Prix", name: "price", widget: "string" }
+
+          # ===== MENU BOISSONS =====
+          - label: "Menu — Boissons"
+            name: "menu_boissons"
+            widget: "list"
+            fields:
+              - { label: "Nom de catégorie", name: "category", widget: "string" }
+              - { label: "Icône FontAwesome (ex: fa-cocktail)", name: "icon", widget: "string" }
+              - label: "Items"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Étiquette", name: "label", widget: "string" }
+                  - { label: "Nom & description", name: "name", widget: "string" }
+                  - { label: "Prix", name: "price", widget: "string" }
+
+          # ===== FOOTER =====
+          - label: "Pied de page"
+            name: "footer"
+            widget: "object"
+            fields:
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Lien Facebook", name: "facebook_url", widget: "string" }
+              - { label: "Lien Instagram", name: "instagram_url", widget: "string" }
+              - { label: "Adresse", name: "address", widget: "string" }
+              - { label: "Téléphone", name: "phone", widget: "string" }
+              - { label: "Copyright", name: "copyright", widget: "string" }
