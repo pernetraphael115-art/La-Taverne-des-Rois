@@ -596,6 +596,57 @@ header.scrolled {
     border-color: var(--primary-color);
 }
 
+.legal-content {
+    max-width: 800px;
+    padding: 40px;
+    text-align: left;
+}
+
+.legal-content h2 {
+    color: var(--primary-color);
+    margin-bottom: 25px;
+    font-family: var(--font-heading);
+    text-align: center;
+}
+
+.legal-text {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 15px;
+}
+
+.legal-text h3 {
+    color: var(--text-color);
+    margin: 20px 0 10px;
+    font-size: 1.2rem;
+}
+
+.legal-text p {
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+}
+
+/* Custom scrollbar for legal text */
+.legal-text::-webkit-scrollbar {
+    width: 6px;
+}
+.legal-text::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+}
+.legal-text::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 3px;
+}
+
+@media (max-width: 768px) {
+    .legal-content {
+        padding: 30px 20px;
+    }
+}
+
 .footer h4 {
     font-size: 1.2rem;
     margin-bottom: 24px;
@@ -681,7 +732,7 @@ header.scrolled {
 }
 
 .form-modal {
-    max-width: 600px;
+    max-width: 700px;
 }
 
 .dish-modal {
@@ -735,6 +786,150 @@ header.scrolled {
     margin-top: 40px;
     text-align: center;
 }
+
+/* Reservation Modal */
+.reservation-choice {
+    display: flex;
+    gap: 24px;
+}
+
+.reservation-option-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 40px 24px 32px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    text-decoration: none;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.reservation-option-card:hover {
+    border-color: var(--primary-color);
+    background: rgba(212, 175, 55, 0.08);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(212, 175, 55, 0.15);
+}
+
+.reservation-option-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 1.6rem;
+    color: var(--bg-darker);
+}
+
+.reservation-option-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+    color: var(--text-light);
+}
+
+.reservation-option-card p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.reservation-option-cta {
+    color: var(--primary-color);
+    font-weight: 500;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.reservation-option-cta i {
+    transition: transform var(--transition-fast);
+}
+
+.reservation-option-card:hover .reservation-option-cta i {
+    transform: translateX(4px);
+}
+
+.reservation-back-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 8px 0;
+    margin-bottom: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition-fast);
+    font-family: var(--font-body);
+}
+
+.reservation-back-btn:hover {
+    color: var(--primary-color);
+}
+
+/* Opening Hours in Footer */
+.opening-hours {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+}
+
+.opening-hours li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.opening-hours li:last-child {
+    border-bottom: none;
+}
+
+.opening-hours li span:first-child {
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.brand-col h4 i {
+    color: var(--primary-color);
+    margin-right: 8px;
+}
+
+.opening-hours-note {
+    display: block !important;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    opacity: 0.7;
+    padding-top: 10px;
+    border-bottom: none !important;
+    line-height: 1.4;
+}
+
+.opening-hours-note i {
+    color: var(--primary-color);
+    margin-right: 6px;
+    font-size: 0.75rem;
+}
+
 
 /* Menu Modal Specifics */
 .menu-categories {
@@ -889,15 +1084,44 @@ header.scrolled {
 
 .pdj-item {
     display: grid;
-    grid-template-columns: 130px 1fr auto;
+    grid-template-columns: 130px 1fr auto auto;
     gap: 12px;
-    align-items: baseline;
+    align-items: center;
     padding: 10px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .pdj-item:last-child {
     border-bottom: none;
+}
+
+/* Dish Photo Button */
+.dish-photo-btn {
+    background: none;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: var(--primary-color);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.75rem;
+    transition: all 0.3s ease;
+    opacity: 0.6;
+    flex-shrink: 0;
+}
+
+.dish-photo-btn:hover {
+    opacity: 1;
+    background: rgba(212, 175, 55, 0.15);
+    border-color: var(--primary-color);
+    transform: scale(1.15);
+}
+
+.dish-photo-btn:active {
+    transform: scale(0.95);
 }
 
 .pdj-label {
@@ -1128,6 +1352,96 @@ header.scrolled {
 }
 
 /* ---------------------------------
+   DISH PHOTO LIGHTBOX
+--------------------------------- */
+.dish-photo-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 4000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.dish-photo-lightbox.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.dish-photo-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+}
+
+.dish-photo-close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.dish-photo-close:hover {
+    background: var(--primary-color);
+    color: var(--bg-darker);
+    border-color: var(--primary-color);
+    transform: rotate(90deg);
+}
+
+.dish-photo-container {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    width: 90%;
+    text-align: center;
+    transform: translateY(20px) scale(0.95);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dish-photo-lightbox.active .dish-photo-container {
+    transform: translateY(0) scale(1);
+}
+
+.dish-photo-title {
+    color: var(--primary-color);
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.dish-photo-frame {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    background: var(--bg-card);
+}
+
+.dish-photo-frame img {
+    width: 100%;
+    display: block;
+    max-height: 70vh;
+    object-fit: cover;
+}
+
+/* ---------------------------------
    ANIMATIONS
 --------------------------------- */
 @keyframes fadeInUp {
@@ -1340,6 +1654,37 @@ header.scrolled {
         margin-top: 24px;
     }
 
+    /* Reservation Modal responsive */
+    .reservation-choice {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .reservation-option-card {
+        padding: 28px 20px 24px;
+    }
+
+    .reservation-option-icon {
+        width: 56px;
+        height: 56px;
+        font-size: 1.3rem;
+    }
+
+    .form-modal {
+        max-width: 95%;
+    }
+
+    /* Footer responsive */
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .opening-hours {
+        max-width: 300px;
+    }
+
+
     /* Menu Tabs */
     .menu-categories {
         flex-wrap: nowrap;
@@ -1373,9 +1718,26 @@ header.scrolled {
     }
 
     .pdj-item {
-        grid-template-columns: 1fr;
-        gap: 2px;
+        grid-template-columns: 1fr auto;
+        gap: 4px;
         padding: 8px 0;
+    }
+
+    .pdj-label {
+        grid-column: 1 / -1;
+    }
+
+    .pdj-name {
+        grid-column: 1 / 2;
+    }
+
+    .dish-photo-btn {
+        grid-row: 2 / 4;
+        grid-column: 2;
+        align-self: center;
+        width: 28px;
+        height: 28px;
+        font-size: 0.7rem;
     }
 
     .pdj-label {

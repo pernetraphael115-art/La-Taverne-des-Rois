@@ -9,8 +9,13 @@
     // ==============================
     // CONFIGURATION
     // ==============================
-    const CMS_PASSWORD = 'taverne2025'; // Mot de passe admin (à changer)
+    // SHA-256 hash of admin password (hash of 'taverne2025')
+    // To change: run in browser console: crypto.subtle.digest('SHA-256', new TextEncoder().encode('YOUR_NEW_PASSWORD')).then(h => console.log(Array.from(new Uint8Array(h)).map(b => b.toString(16).padStart(2,'0')).join('')))
+    const CMS_PASSWORD_HASH = 'dc5d3ad8b1e660476be33f61a89159bcd4b15c95779b6c6c55f19e5ea260a794';
     const CONTENT_JSON_PATH = 'content/site.json';
+    const GITHUB_OWNER = 'pernetraphael115-art';
+    const GITHUB_REPO = 'La-Taverne-des-Rois';
+    const GITHUB_IMAGES_PATH = 'assets/images/cms';
 
     // ==============================
     // STATE
@@ -82,9 +87,18 @@
         setTimeout(() => document.getElementById('cms-password').focus(), 100);
     }
 
-    function attemptLogin() {
+    async function hashPassword(password) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(password);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function attemptLogin() {
         const pwd = document.getElementById('cms-password').value;
-        if (pwd === CMS_PASSWORD) {
+        const pwdHash = await hashPassword(pwd);
+        if (pwdHash === CMS_PASSWORD_HASH) {
             document.getElementById('cms-login').classList.remove('active');
             document.getElementById('cms-password').value = '';
             enterEditMode();
@@ -107,7 +121,7 @@
             </div>
             <div class="cms-toolbar-right">
                 <button class="cms-toolbar-btn cms-btn-save" id="cms-save-btn" disabled>
-                    <i class="fas fa-save"></i> Sauvegarder
+                    <i class="fas fa-save"></i> Publier en ligne
                 </button>
                 <button class="cms-toolbar-btn cms-btn-exit" id="cms-exit-btn">
                     <i class="fas fa-sign-out-alt"></i> Quitter
@@ -224,12 +238,54 @@
     // ==============================
     // EDIT MODE
     // ==============================
+    function preventNav(e) {
+        if (!isEditMode) return;
+        if (e.target.closest('#cms-panel') || e.target.closest('#cms-toolbar') || e.target.closest('#cms-login') || e.target.closest('#cms-item-editor') || e.target.closest('#cms-toast')) return;
+        const actionable = e.target.closest('a, button');
+        if (actionable) {
+            e.preventDefault();
+        }
+    }
+
+    function interceptDishPhotoClick(e) {
+        if (!isEditMode) return;
+        const btn = e.target.closest('.dish-photo-btn');
+        if (!btn) return;
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        currentEditDishBtn = btn;
+        const name = btn.getAttribute('data-dish-name') || '';
+        const imageUrl = btn.getAttribute('data-dish-image') || '';
+
+        const lightbox = document.getElementById('dish-photo-lightbox');
+        const img = document.getElementById('dish-photo-img');
+        const title = lightbox.querySelector('.dish-photo-title');
+        const replaceBtn = document.getElementById('cms-dish-replace-btn');
+
+        title.textContent = name;
+        if (imageUrl) {
+            img.src = imageUrl;
+            img.style.display = 'block';
+        } else {
+            img.src = '';
+            img.style.display = 'none';
+        }
+
+        replaceBtn.style.display = 'inline-flex';
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
     function enterEditMode() {
         isEditMode = true;
         hasUnsavedChanges = false;
         document.body.classList.add('cms-edit-mode');
         document.getElementById('cms-toolbar').classList.add('active');
         document.getElementById('cms-save-btn').disabled = true;
+
+        document.addEventListener('click', preventNav, true);
+        document.addEventListener('click', interceptDishPhotoClick, true);
 
         // Tag all editable elements
         tagEditableElements();
@@ -247,6 +303,9 @@
         document.getElementById('cms-toolbar').classList.remove('active');
         closeItemEditor();
         hideFormatBar();
+
+        document.removeEventListener('click', preventNav, true);
+        document.removeEventListener('click', interceptDishPhotoClick, true);
 
         // Remove all editable attributes
         document.querySelectorAll('[data-cms-editable]').forEach(el => {
@@ -309,10 +368,17 @@
             '.pdj-formule-card h4',
             '.pdj-formule-card p',
             '.pdj-formule-price',
+            'a',
+            'button'
         ];
 
         textSelectors.forEach(sel => {
             document.querySelectorAll(sel).forEach(el => {
+                if (el.closest('#cms-panel') || el.closest('#cms-toolbar') || el.closest('#cms-login') || el.closest('#cms-item-editor') || el.closest('#cms-toast')) return;
+                if (el.closest('.modal-close') || el.closest('.lightbox-close') || el.classList.contains('mobile-menu-btn') || el.classList.contains('close-mobile-nav')) return;
+                if (el.classList.contains('dish-photo-btn') || el.classList.contains('dish-photo-close') || el.classList.contains('cms-dish-replace-btn')) return;
+                if (el.getAttribute('data-cms-editable')) return;
+
                 el.setAttribute('data-cms-editable', 'text');
                 el.addEventListener('click', handleTextClick);
             });
@@ -367,13 +433,127 @@
         e.stopPropagation();
 
         const container = e.currentTarget;
-        const img = container.querySelector('img');
-        if (!img) return;
 
         openImagePicker((dataUrl) => {
-            img.src = dataUrl;
+            const img = container.querySelector('img');
+            if (img) {
+                img.src = dataUrl;
+            }
             showToast('📷 Image mise à jour');
         });
+    }
+
+    // --- Dish photo edit: open lightbox with "Replace" button ---
+    let currentEditDishBtn = null;
+
+    function handleDishPhotoBtnClick(e) {
+        if (!isEditMode) return;
+        e.preventDefault();
+        e.stopPropagation();
+
+        const btn = e.currentTarget;
+        currentEditDishBtn = btn;
+        const name = btn.getAttribute('data-dish-name') || '';
+        const imageUrl = btn.getAttribute('data-dish-image') || '';
+
+        const lightbox = document.getElementById('dish-photo-lightbox');
+        const img = document.getElementById('dish-photo-img');
+        const title = lightbox.querySelector('.dish-photo-title');
+        const replaceBtn = document.getElementById('cms-dish-replace-btn');
+
+        title.textContent = name;
+        if (imageUrl) {
+            img.src = imageUrl;
+            img.style.display = 'block';
+        } else {
+            img.src = '';
+            img.style.display = 'none';
+        }
+
+        replaceBtn.style.display = 'inline-flex';
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    // ==============================
+    // IMAGE UPLOAD TO GITHUB
+    // ==============================
+
+    /**
+     * Upload a base64 data URL image to GitHub repo.
+     * Returns the relative path (e.g. /assets/images/cms/img_1234567890.jpg)
+     */
+    async function uploadImageToGitHub(dataUrl, ghToken) {
+        // Extract MIME type and base64 content
+        const match = dataUrl.match(/^data:(image\/\w+);base64,(.+)$/);
+        if (!match) throw new Error('Format image invalide');
+
+        const mimeType = match[1];
+        const base64Content = match[2];
+        const ext = mimeType.split('/')[1].replace('jpeg', 'jpg');
+        const filename = `img_${Date.now()}_${Math.random().toString(36).substring(2, 8)}.${ext}`;
+        const filePath = `${GITHUB_IMAGES_PATH}/${filename}`;
+        const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${filePath}`;
+
+        const putRes = await fetch(apiUrl, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${ghToken}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                message: `Upload image: ${filename}`,
+                content: base64Content
+            })
+        });
+
+        if (!putRes.ok) {
+            if (putRes.status === 401 || putRes.status === 403) {
+                localStorage.removeItem('cms_gh_token');
+                throw new Error('Clé GitHub invalide ou permissions insuffisantes.');
+            }
+            const errData = await putRes.json();
+            throw new Error(`Erreur upload image: ${errData.message || putRes.statusText}`);
+        }
+
+        return `/${filePath}`;
+    }
+
+    /**
+     * Scan the collected data for base64 images and upload them to GitHub.
+     * Replaces data: URLs with GitHub-hosted paths in-place.
+     */
+    async function uploadAllBase64Images(data, ghToken, progressCallback) {
+        const imagesToUpload = [];
+
+        // Collect all base64 image references
+        function scanForBase64(obj, path) {
+            if (!obj || typeof obj !== 'object') return;
+            if (Array.isArray(obj)) {
+                obj.forEach((item, i) => scanForBase64(item, `${path}[${i}]`));
+                return;
+            }
+            for (const [key, value] of Object.entries(obj)) {
+                if (typeof value === 'string' && value.startsWith('data:image/')) {
+                    imagesToUpload.push({ obj, key, dataUrl: value });
+                } else if (typeof value === 'object') {
+                    scanForBase64(value, `${path}.${key}`);
+                }
+            }
+        }
+
+        scanForBase64(data, 'root');
+
+        if (imagesToUpload.length === 0) return;
+
+        for (let i = 0; i < imagesToUpload.length; i++) {
+            const img = imagesToUpload[i];
+            if (progressCallback) {
+                progressCallback(i + 1, imagesToUpload.length);
+            }
+            const remotePath = await uploadImageToGitHub(img.dataUrl, ghToken);
+            img.obj[img.key] = remotePath;
+        }
     }
 
     // ==============================
@@ -382,36 +562,115 @@
     async function saveContent() {
         const btn = document.getElementById('cms-save-btn');
         btn.disabled = true;
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sauvegarde...';
 
         try {
-            // Collect all the current content from the DOM
+            // Step 1: Collect content
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Collecte du contenu...';
             const data = collectContentFromDOM();
 
-            // Download JSON file
-            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'site.json';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
+            // Step 2: Get GitHub token
+            let ghToken = localStorage.getItem('cms_gh_token');
+            if (!ghToken) {
+                ghToken = prompt(
+                    "🔑 Entrez votre clé secrète GitHub (Personal Access Token) pour publier les modifications en ligne.\n\n" +
+                    "Cette clé sera mémorisée dans votre navigateur pour les prochaines fois."
+                );
+                if (!ghToken) {
+                    showToast('⚠️ Publication annulée — aucune clé fournie.', 'error');
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fas fa-save"></i> Publier en ligne';
+                    return;
+                }
+                localStorage.setItem('cms_gh_token', ghToken);
+            }
 
-            // Also save to localStorage for immediate persistence
+            // Step 3: Upload base64 images to GitHub
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Upload des images...';
+            showToast('📷 Upload des images en cours...');
+            await uploadAllBase64Images(data, ghToken, (current, total) => {
+                btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Image ${current}/${total}...`;
+            });
+
+            // Step 4: Save to localStorage for immediate local persistence
             localStorage.setItem('cms_site_content', JSON.stringify(data));
 
+            // Step 5: Commit site.json to GitHub
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Publication du contenu...';
+            showToast('⏳ Publication du contenu en cours...');
+
+            const jsonStr = JSON.stringify(data, null, 2);
+            const path = 'content/site.json';
+            const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}`;
+
+            // Get file SHA
+            const getRes = await fetch(apiUrl, {
+                headers: { 'Authorization': `Bearer ${ghToken}` }
+            });
+            let sha = null;
+            if (getRes.ok) {
+                const fileData = await getRes.json();
+                sha = fileData.sha;
+            } else if (getRes.status === 401 || getRes.status === 403) {
+                localStorage.removeItem('cms_gh_token');
+                throw new Error('Clé GitHub invalide ou expirée. Réessayez.');
+            } else if (getRes.status !== 404) {
+                throw new Error('Erreur GitHub API : ' + getRes.statusText);
+            }
+
+            // Put new file
+            const encodedContent = btoa(unescape(encodeURIComponent(jsonStr)));
+            const putData = {
+                message: 'Mise à jour du contenu via CMS — ' + new Date().toLocaleString('fr-FR'),
+                content: encodedContent
+            };
+            if (sha) putData.sha = sha;
+
+            const putRes = await fetch(apiUrl, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${ghToken}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(putData)
+            });
+
+            if (!putRes.ok) {
+                if (putRes.status === 401 || putRes.status === 403) {
+                    localStorage.removeItem('cms_gh_token');
+                    throw new Error('Clé GitHub invalide ou permissions insuffisantes. Réessayez.');
+                }
+                const errData = await putRes.json();
+                throw new Error(errData.message || 'Erreur lors du commit');
+            }
+
+            // Step 6: Success with deployment countdown
             hasUnsavedChanges = false;
-            showToast('✅ Contenu sauvegardé ! Le fichier site.json a été téléchargé.');
+            btn.innerHTML = '<i class="fas fa-check"></i> Publié !';
+            showToast('✅ Publié avec succès ! Les changements seront visibles par tous dans ~30 secondes.', 'success');
+
+            // Show countdown in toolbar
+            let countdown = 30;
+            const countdownInterval = setInterval(() => {
+                countdown--;
+                if (countdown > 0) {
+                    btn.innerHTML = `<i class="fas fa-clock"></i> En ligne dans ${countdown}s...`;
+                } else {
+                    clearInterval(countdownInterval);
+                    btn.innerHTML = '<i class="fas fa-save"></i> Publier en ligne';
+                    btn.disabled = true; // No unsaved changes
+                    showToast('🌐 Vos modifications sont maintenant visibles par tout le monde !', 'success');
+                }
+            }, 1000);
+
+            return; // Don't reset button — countdown handles it
 
         } catch (err) {
-            showToast('❌ Erreur lors de la sauvegarde', 'error');
+            showToast('❌ Erreur : ' + err.message, 'error');
             console.error('CMS Save Error:', err);
         }
 
         btn.disabled = false;
-        btn.innerHTML = '<i class="fas fa-save"></i> Sauvegarder';
+        btn.innerHTML = '<i class="fas fa-save"></i> Publier en ligne';
     }
 
     function collectContentFromDOM() {
@@ -432,9 +691,9 @@
             data.hero.subtitle = heroP.textContent.trim();
         }
         const heroBg = document.querySelector('.hero-bg > img');
-        if (heroBg && !heroBg.src.startsWith('data:')) {
+        if (heroBg) {
             data.hero = data.hero || {};
-            data.hero.background_image = heroBg.getAttribute('src');
+            data.hero.background_image = heroBg.src.startsWith('data:') ? heroBg.src : heroBg.getAttribute('src');
         }
 
         // Restaurant
@@ -446,7 +705,7 @@
         if (restSubtitle) data.restaurant.subtitle = restSubtitle.textContent.trim();
         if (restTitle) data.restaurant.title = restTitle.textContent.trim();
         if (restParas.length) data.restaurant.paragraphs = Array.from(restParas).map(p => p.textContent.trim());
-        if (restImg && !restImg.src.startsWith('data:')) data.restaurant.image = restImg.getAttribute('src');
+        if (restImg) data.restaurant.image = restImg.src.startsWith('data:') ? restImg.src : restImg.getAttribute('src');
 
         // Gallery
         const galleryImgs = document.querySelectorAll('.gallery-item img');
@@ -508,6 +767,22 @@
         const copyright = document.querySelector('.footer-bottom p');
         if (copyright) data.footer.copyright = copyright.textContent.trim();
 
+        // Links generic saving
+        data.links = data.links || {};
+        document.querySelectorAll('[data-cms-link]').forEach(el => {
+            const id = el.getAttribute('data-cms-link');
+            if (id) {
+                const linkData = {};
+                linkData.text = el.innerHTML.trim();
+                if (el.tagName.toLowerCase() === 'a') linkData.href = el.getAttribute('href') || '';
+                if (el.classList.contains('open-menu-modal')) linkData.modalClass = 'open-menu-modal';
+                else if (el.classList.contains('open-privatization-modal')) linkData.modalClass = 'open-privatization-modal';
+                else if (el.classList.contains('open-dish-reservation')) linkData.modalClass = 'open-dish-reservation';
+                else linkData.modalClass = '';
+                data.links[id] = linkData;
+            }
+        });
+
         return data;
     }
 
@@ -521,7 +796,8 @@
             const items = Array.from(block.querySelectorAll('.pdj-item')).map(item => ({
                 label: item.querySelector('.pdj-label')?.textContent.trim() || '',
                 name: item.querySelector('.pdj-name')?.textContent.trim() || '',
-                price: item.querySelector('.pdj-price')?.textContent.trim() || ''
+                price: item.querySelector('.pdj-price')?.textContent.trim() || '',
+                image: item.querySelector('.dish-photo-btn')?.getAttribute('data-dish-image') || ''
             }));
 
             const iconClass = iconEl ? Array.from(iconEl.classList).find(c => c.startsWith('fa-')) : '';
@@ -631,6 +907,33 @@
                 <button class="cms-panel-close" id="cms-panel-close"><i class="fas fa-times"></i></button>
             </div>
             <div class="cms-panel-body">
+                <div class="cms-section" id="cms-link-section" style="display:none;">
+                    <span class="cms-section-label">Lien / Action</span>
+                    <select id="cms-p-link" class="cms-select" style="width: 100%; margin-bottom: 5px; padding: 5px; background: #fff; border: 1px solid #ccc; border-radius: 4px; color: #333;">
+                        <option value="">-- Aucun / Défaut --</option>
+                        <optgroup label="Pages du site">
+                            <option value="/">Accueil</option>
+                            <option value="/restaurant-cergy/">Restaurant</option>
+                            <option value="/la-carte/">La Carte</option>
+                            <option value="/galerie/">Galerie</option>
+                            <option value="/actualites/">Actualités</option>
+                            <option value="/privatisation/">Privatisation</option>
+                            <option value="/reservation/">Réservation</option>
+                            <option value="/mentions-legales/">Mentions légales</option>
+                            <option value="/donnees-personnelles/">Données personnelles</option>
+                        </optgroup>
+                        <optgroup label="Pop-ups (Modales)">
+                            <option value="modal:menu-modal">Pop-up : La Carte</option>
+                            <option value="modal:privatization-modal">Pop-up : Privatisation</option>
+                            <option value="modal:dish-reservation-modal">Pop-up : Réservation</option>
+                        </optgroup>
+                        <optgroup label="Lien externe">
+                            <option value="external">Lien personnalisé...</option>
+                        </optgroup>
+                    </select>
+                    <input type="text" id="cms-p-link-custom" class="cms-text-input" placeholder="https://..." style="display:none; width: 100%; padding: 5px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; color: #333;">
+                </div>
+
                 <div class="cms-section">
                     <span class="cms-section-label">Police</span>
                     <div class="cms-font-row">
@@ -697,6 +1000,54 @@
 
         // === Bind panel events ===
         document.getElementById('cms-panel-close').addEventListener('click', hideFormatBar);
+
+        // Link changes
+        document.getElementById('cms-p-link').addEventListener('change', (e) => {
+            if (!panelTarget) return;
+            const val = e.target.value;
+            const customInput = document.getElementById('cms-p-link-custom');
+            
+            panelTarget.classList.remove('open-menu-modal', 'open-privatization-modal', 'open-dish-reservation');
+            
+            if (val.startsWith('modal:')) {
+                customInput.style.display = 'none';
+                const modalId = val.split(':')[1];
+                if (modalId === 'menu-modal') panelTarget.classList.add('open-menu-modal');
+                if (modalId === 'privatization-modal') panelTarget.classList.add('open-privatization-modal');
+                if (modalId === 'dish-reservation-modal') panelTarget.classList.add('open-dish-reservation');
+                if (panelTarget.tagName.toLowerCase() === 'a') panelTarget.setAttribute('href', '#');
+            } else if (val === 'external') {
+                customInput.style.display = 'block';
+                if (panelTarget.tagName.toLowerCase() === 'a') panelTarget.setAttribute('href', customInput.value || '#');
+            } else {
+                customInput.style.display = 'none';
+                if (panelTarget.tagName.toLowerCase() === 'a') panelTarget.setAttribute('href', val || '#');
+            }
+        });
+        
+        document.getElementById('cms-p-link-custom').addEventListener('input', (e) => {
+            if (!panelTarget) return;
+            if (panelTarget.tagName.toLowerCase() === 'a') {
+                panelTarget.setAttribute('href', e.target.value);
+            }
+        });
+
+        // Dish photo replace button
+        document.getElementById('cms-dish-replace-btn').addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            openImagePicker((dataUrl) => {
+                if (currentEditDishBtn) {
+                    currentEditDishBtn.setAttribute('data-dish-image', dataUrl);
+                    currentEditDishBtn.classList.remove('cms-no-image');
+                }
+                // Update lightbox preview
+                const img = document.getElementById('dish-photo-img');
+                img.src = dataUrl;
+                img.style.display = 'block';
+                showToast('📷 Image du plat mise à jour');
+            });
+        });
 
         // Font family
         document.getElementById('cms-p-font').addEventListener('change', (e) => {
@@ -858,6 +1209,43 @@
 
         // Set panel title
         document.getElementById('cms-panel-title').textContent = 'Modification — ' + getElementLabel(el);
+
+        // Setup Link Option
+        const linkSection = document.getElementById('cms-link-section');
+        const linkSelect = document.getElementById('cms-p-link');
+        const linkCustom = document.getElementById('cms-p-link-custom');
+        const tag = el.tagName.toLowerCase();
+        
+        if (tag === 'a' || tag === 'button') {
+            linkSection.style.display = 'block';
+            let matchedLink = '';
+            
+            if (el.classList.contains('open-menu-modal')) matchedLink = 'modal:menu-modal';
+            else if (el.classList.contains('open-privatization-modal')) matchedLink = 'modal:privatization-modal';
+            else if (el.classList.contains('open-dish-reservation')) matchedLink = 'modal:dish-reservation-modal';
+            else if (tag === 'a') {
+                const href = el.getAttribute('href') || '#';
+                if (href === '#' || href === '') matchedLink = '';
+                else {
+                    let found = false;
+                    Array.from(linkSelect.options).forEach(opt => {
+                        if (opt.value === href) { matchedLink = href; found = true; }
+                    });
+                    if (!found) matchedLink = 'external';
+                }
+            }
+            
+            linkSelect.value = matchedLink;
+            if (matchedLink === 'external') {
+                linkCustom.style.display = 'block';
+                linkCustom.value = el.getAttribute('href') || '';
+            } else {
+                linkCustom.style.display = 'none';
+                linkCustom.value = '';
+            }
+        } else {
+            linkSection.style.display = 'none';
+        }
 
         // Set current values
         const fontSel = document.getElementById('cms-p-font');

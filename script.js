@@ -13,6 +13,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function applyContent(data) {
+        // --- Generic Links ---
+        if (data.links) {
+            document.querySelectorAll('[data-cms-link]').forEach(el => {
+                const id = el.getAttribute('data-cms-link');
+                const linkData = data.links[id];
+                if (linkData) {
+                    if (linkData.text) el.innerHTML = linkData.text;
+                    if (linkData.href && el.tagName.toLowerCase() === 'a') el.href = linkData.href;
+                    // Reset known modal classes
+                    el.classList.remove('open-reservation-modal');
+                    if (linkData.modalClass) {
+                        el.classList.add(linkData.modalClass);
+                    }
+                }
+            });
+        }
+
         // --- Hero ---
         if (data.hero) {
             const h = data.hero;
@@ -193,11 +210,15 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="pdj-label">${item.label}</span>
                             <span class="pdj-name">${item.name}</span>
                             <span class="pdj-price">${item.price}</span>
+                            <button class="dish-photo-btn ${item.image ? '' : 'cms-no-image'}" data-dish-name="${item.name.replace(/"/g, '&quot;')}" data-dish-image="${item.image || ''}" title="Voir/Modifier la photo"><i class="fas fa-camera"></i></button>
                         </div>
                     `).join('')}
                 </div>
             </div>
         `).join('');
+
+        // Bind photo buttons in this section
+        bindDishPhotoButtons(container);
     }
 
     // Load content from JSON on page load
@@ -256,7 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- Modal Management ---
+    // --- Reservation Modal Management ---
 
     // Function to open a modal
     function openModal(modalId) {
@@ -276,49 +297,37 @@ document.addEventListener('DOMContentLoaded', () => {
         if (modal) {
             modal.classList.remove('active');
             document.body.style.overflow = '';
+            // Reset reservation modal to choice screen when closing
+            if (modal.id === 'reservation-modal') {
+                const choice = document.getElementById('reservation-choice');
+                const form = document.getElementById('reservation-group-form');
+                if (choice) choice.style.display = '';
+                if (form) form.style.display = 'none';
+            }
         }
     }
 
-    // Attach Open Events
-    document.querySelectorAll('.open-menu-modal').forEach(btn => {
+    // Open reservation modal
+    document.querySelectorAll('.open-reservation-modal').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
-            openModal('menu-modal');
+            openModal('reservation-modal');
         });
     });
 
-    document.querySelectorAll('.open-privatization-modal').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            openModal('privatization-modal');
-        });
-    });
-
-    document.querySelectorAll('.open-dish-reservation').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            openModal('dish-reservation-modal');
-        });
-    });
-
-    // Attach Close Events
-    const modals = document.querySelectorAll('.modal');
-    modals.forEach(modal => {
-        // Close on backdrop click
-        const backdrop = modal.querySelector('.modal-backdrop');
-        if (backdrop) {
-            backdrop.addEventListener('click', () => closeModal(modal));
-        }
-
-        // Close on button click
-        const closeBtns = modal.querySelectorAll('.modal-close, .close-menu-modal, .close-privatization-modal, .close-dish-modal');
-        closeBtns.forEach(btn => {
+    // Close reservation modal
+    const reservationModal = document.getElementById('reservation-modal');
+    if (reservationModal) {
+        const backdrop = reservationModal.querySelector('.modal-backdrop');
+        if (backdrop) backdrop.addEventListener('click', () => closeModal(reservationModal));
+        
+        reservationModal.querySelectorAll('.modal-close, .close-reservation-modal').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
-                closeModal(modal);
+                closeModal(reservationModal);
             });
         });
-    });
+    }
 
     // Close on Escape Key
     document.addEventListener('keydown', (e) => {
@@ -328,66 +337,89 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Menu Modal Tabs Logic ---
-    const menuTabs = document.querySelectorAll('.menu-tab');
-    const menuSections = document.querySelectorAll('.menu-section');
+    // Large group button → show form
+    const btnLargeGroup = document.getElementById('btn-large-group');
+    const reservationChoice = document.getElementById('reservation-choice');
+    const reservationGroupForm = document.getElementById('reservation-group-form');
 
-    menuTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            // Remove active classes
-            menuTabs.forEach(t => t.classList.remove('active'));
-            menuSections.forEach(s => {
-                s.classList.remove('active');
-                s.style.display = 'none';
-            });
-
-            // Add active class to clicked tab
-            tab.classList.add('active');
-
-            // Show corresponding section
-            const target = tab.getAttribute('data-target');
-            const targetSection = document.getElementById('menu-' + target);
-            if (targetSection) {
-                targetSection.style.display = 'block';
-                // Small timeout to allow display block before animating opacity (simulated)
-                setTimeout(() => {
-                    targetSection.classList.add('active');
-                }, 10);
-            }
+    if (btnLargeGroup) {
+        btnLargeGroup.addEventListener('click', () => {
+            reservationChoice.style.display = 'none';
+            reservationGroupForm.style.display = 'block';
         });
-    });
+    }
 
-    // --- Privatization Form Simulation ---
-    const privatizationForm = document.getElementById('privatization-form');
-    const formSuccessMsg = document.getElementById('form-success-msg');
+    // Back button → show choice
+    const backBtn = document.getElementById('reservation-back');
+    if (backBtn) {
+        backBtn.addEventListener('click', () => {
+            reservationGroupForm.style.display = 'none';
+            reservationChoice.style.display = '';
+        });
+    }
 
-    if (privatizationForm) {
-        privatizationForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // Prevent page reload
+    // Group reservation form submission
+    const groupForm = document.getElementById('group-reservation-form');
+    const groupSuccess = document.getElementById('group-form-success');
 
-            // Simulate processing
-            const submitBtn = privatizationForm.querySelector('button[type="submit"]');
+    if (groupForm) {
+        groupForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = groupForm.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerText;
             submitBtn.innerText = 'Envoi en cours...';
             submitBtn.disabled = true;
 
-            setTimeout(() => {
-                // Hide form, show success message
-                privatizationForm.style.display = 'none';
-                formSuccessMsg.style.display = 'block';
+            // Collect form data for Web3Forms
+            const formData = {
+                access_key: 'ffe93cfc-7ed8-4f01-a6f5-89de6f2f8546',
+                subject: 'Nouvelle demande de réservation groupe — La Taverne des Rois',
+                from_name: 'Site Web - La Taverne des Rois',
+                name: groupForm.querySelector('#grp-nom').value + ' ' + groupForm.querySelector('#grp-prenom').value,
+                email: groupForm.querySelector('#grp-email').value,
+                phone: groupForm.querySelector('#grp-tel').value,
+                guests: groupForm.querySelector('#grp-personnes').value,
+                date: groupForm.querySelector('#grp-date').value,
+                message: groupForm.querySelector('#grp-message').value || 'Aucun commentaire.'
+            };
 
-                // Allow resetting after 3 seconds for demo purposes
-                setTimeout(() => {
-                    privatizationForm.reset();
-                    privatizationForm.style.display = 'flex';
-                    formSuccessMsg.style.display = 'none';
+            try {
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    groupForm.style.display = 'none';
+                    groupSuccess.style.display = 'block';
+
+                    setTimeout(() => {
+                        groupForm.reset();
+                        groupForm.style.display = 'flex';
+                        groupSuccess.style.display = 'none';
+                        submitBtn.innerText = originalText;
+                        submitBtn.disabled = false;
+                        closeModal(document.getElementById('reservation-modal'));
+                    }, 4000);
+                } else {
+                    alert(result.message || "Une erreur est survenue.");
                     submitBtn.innerText = originalText;
                     submitBtn.disabled = false;
-                    closeModal(document.getElementById('privatization-modal'));
-                }, 3000);
-            }, 1000);
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert("Erreur de connexion au serveur.");
+                submitBtn.innerText = originalText;
+                submitBtn.disabled = false;
+            }
         });
     }
+
 
     // --- Gallery Lightbox ---
     const lightbox = document.getElementById('gallery-lightbox');
@@ -396,6 +428,59 @@ document.addEventListener('DOMContentLoaded', () => {
     let galleryImages = [];
 
     function initLightbox() {
+        const closeMentionsBtn = document.getElementById('close-mentions-modal');
+        const mentionsModal = document.getElementById('mentions-modal');
+        const donneesModal = document.getElementById('donnees-modal');
+        const closeDonneesBtn = document.getElementById('close-donnees-modal');
+        const mentionsLink = document.querySelector('a[data-cms-link="footer-link-4"]');
+        const donneesLink = document.querySelector('a[data-cms-link="footer-link-5"]');
+
+        if (mentionsLink) {
+            mentionsLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                mentionsModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        }
+
+        if (donneesLink) {
+            donneesLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                donneesModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        }
+
+        if (closeMentionsBtn) {
+            closeMentionsBtn.addEventListener('click', () => {
+                mentionsModal.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        }
+
+        if (closeDonneesBtn) {
+            closeDonneesBtn.addEventListener('click', () => {
+                donneesModal.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        }
+
+        // Close on click outside for legal modals
+        const backdrops = [
+            document.getElementById('backdrop-mentions'),
+            document.getElementById('backdrop-donnees')
+        ];
+        
+        backdrops.forEach(backdrop => {
+            if (backdrop) {
+                backdrop.addEventListener('click', (e) => {
+                    mentionsModal.classList.remove('active');
+                    donneesModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            }
+        });
+
         const items = document.querySelectorAll('.gallery-item');
         galleryImages = [];
         items.forEach((item, index) => {
@@ -459,4 +544,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize lightbox for hardcoded gallery
     initLightbox();
+
+    // --- Dish Photo Lightbox ---
+    const dishPhotoLightbox = document.getElementById('dish-photo-lightbox');
+    const dishPhotoImg = document.getElementById('dish-photo-img');
+    const dishPhotoTitle = dishPhotoLightbox.querySelector('.dish-photo-title');
+
+    function openDishPhoto(name, imageUrl) {
+        dishPhotoTitle.textContent = name;
+        dishPhotoImg.src = imageUrl;
+        dishPhotoLightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeDishPhoto() {
+        dishPhotoLightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function bindDishPhotoButtons(container) {
+        container.querySelectorAll('.dish-photo-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const name = btn.getAttribute('data-dish-name');
+                const image = btn.getAttribute('data-dish-image');
+                openDishPhoto(name, image);
+            });
+        });
+    }
+
+    // Make bindDishPhotoButtons available globally for renderMenuTab
+    window.bindDishPhotoButtons = bindDishPhotoButtons;
+
+    dishPhotoLightbox.querySelector('.dish-photo-close').addEventListener('click', closeDishPhoto);
+    dishPhotoLightbox.querySelector('.dish-photo-backdrop').addEventListener('click', closeDishPhoto);
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && dishPhotoLightbox.classList.contains('active')) {
+            closeDishPhoto();
+        }
+    });
+
+    // Bind any hardcoded photo buttons already in the DOM
+    bindDishPhotoButtons(document);
 });

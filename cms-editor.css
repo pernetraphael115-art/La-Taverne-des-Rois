@@ -884,3 +884,34 @@ body.cms-edit-mode .cms-drop-indicator {
         flex-direction: column;
     }
 }
+
+/* Dish Photo Replace Button (CMS edit mode) */
+.cms-dish-replace-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    background: linear-gradient(135deg, #d4af37, #b8962e);
+    color: #0a0e17;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 28px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cms-dish-replace-btn:hover {
+    transform: translateX(-50%) translateY(-2px);
+    box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
+}
+
+.dish-photo-frame {
+    position: relative;
+}

@@ -35,6 +35,90 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="cms-editor.css">
+    <!-- Schema.org Structured Data (SEO) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Restaurant",
+                "@id": "https://latavernedesrois.fr/#organization",
+                "name": "La Taverne des Rois",
+                "url": "https://latavernedesrois.fr",
+                "telephone": "+33134249096",
+                "email": "contact@latavernedesrois.fr",
+                "priceRange": "$$",
+                "servesCuisine": "Cuisine française",
+                "description": "La Taverne des Rois est un restaurant emblématique à Port Cergy. Depuis 30 ans, on y savoure une cuisine française généreuse dans un cadre chaleureux en bord de l'Oise.",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "18 Quai de la Tourelle",
+                    "addressLocality": "Cergy",
+                    "addressRegion": "Val d'Oise",
+                    "postalCode": "95000",
+                    "addressCountry": "FR"
+                },
+                "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": 49.031394958496094,
+                    "longitude": 2.06032395362854
+                },
+                "hasMap": "https://www.google.com/maps/search/?api=1&query=49.031394958496094,2.06032395362854",
+                "openingHoursSpecification": [
+                    {
+                        "@type": "OpeningHoursSpecification",
+                        "dayOfWeek": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
+                        "opens": "10:00",
+                        "closes": "23:15"
+                    },
+                    {
+                        "@type": "OpeningHoursSpecification",
+                        "dayOfWeek": ["Friday", "Saturday"],
+                        "opens": "10:00",
+                        "closes": "00:15"
+                    }
+                ],
+                "sameAs": [
+                    "https://www.facebook.com/latavernedesrois",
+                    "https://www.instagram.com/latavernedesroiscergy"
+                ],
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://latavernedesrois.fr/assets/images/logo_transparent.png"
+                },
+                "image": {
+                    "@type": "ImageObject",
+                    "url": "https://latavernedesrois.fr/assets/images/hero_bg.png"
+                }
+            },
+            {
+                "@type": "WebSite",
+                "@id": "https://latavernedesrois.fr/#website",
+                "url": "https://latavernedesrois.fr",
+                "name": "La Taverne des Rois",
+                "alternateName": "Restaurant Port Cergy - La Taverne des Rois",
+                "publisher": {
+                    "@id": "https://latavernedesrois.fr/#organization"
+                },
+                "inLanguage": "fr-FR"
+            },
+            {
+                "@type": "WebPage",
+                "@id": "https://latavernedesrois.fr/#webpage",
+                "url": "https://latavernedesrois.fr/",
+                "name": "La Taverne des Rois - Restaurant Port Cergy",
+                "description": "Découvrez La Taverne des Rois, votre restaurant Port Cergy offrant une cuisine française savoureuse dans un cadre chaleureux en bord de l'Oise.",
+                "isPartOf": {
+                    "@id": "https://latavernedesrois.fr/#website"
+                },
+                "about": {
+                    "@id": "https://latavernedesrois.fr/#organization"
+                },
+                "inLanguage": "fr-FR"
+            }
+        ]
+    }
+    </script>
 </head>
 
 <body>
@@ -45,13 +129,10 @@
 
             <nav class="desktop-nav">
                 <ul>
-                    <li><a href="#restaurant">Restaurant</a></li>
-                    <li><a href="#" class="open-menu-modal">La carte</a></li>
-                    <li><a href="#galerie">Galerie</a></li>
-                    <li><a href="#actualites">Actualités</a></li>
-                    <li><a href="#" class="open-privatization-modal">Privatisation</a></li>
-                    <li><a href="https://reservation.dish.co/widget/hydra-e025b23d-362b-4d54-89ee-29dfd908bef2"
-                            target="_blank" class="btn-primary">Réservation</a></li>
+                    <li><a href="#restaurant" data-cms-link="nav-desktop-1">Restaurant</a></li>
+                    <li><a href="https://latavernedesrois.fr/wp-content/uploads/2025/02/Menu-25x33-AH-2025-1.pdf" target="_blank" data-cms-link="nav-desktop-2">La carte</a></li>
+                    <li><a href="#galerie" data-cms-link="nav-desktop-3">Galerie</a></li>
+                    <li><a href="#" class="open-reservation-modal btn-primary" data-cms-link="nav-desktop-btn">Réservation</a></li>
                 </ul>
             </nav>
 
@@ -66,13 +147,10 @@
         <div class="mobile-nav-content">
             <button class="close-mobile-nav"><i class="fas fa-times"></i></button>
             <ul>
-                <li><a href="#restaurant">Restaurant</a></li>
-                <li><a href="#" class="open-menu-modal">La carte</a></li>
-                <li><a href="#galerie">Galerie</a></li>
-                <li><a href="#actualites">Actualités</a></li>
-                <li><a href="#" class="open-privatization-modal">Privatisation</a></li>
-                <li><a href="https://reservation.dish.co/widget/hydra-e025b23d-362b-4d54-89ee-29dfd908bef2"
-                        target="_blank" class="btn-primary">Réservation</a></li>
+                <li><a href="#restaurant" data-cms-link="nav-mobile-1">Restaurant</a></li>
+                <li><a href="https://latavernedesrois.fr/wp-content/uploads/2025/02/Menu-25x33-AH-2025-1.pdf" target="_blank" data-cms-link="nav-mobile-2">La carte</a></li>
+                <li><a href="#galerie" data-cms-link="nav-mobile-3">Galerie</a></li>
+                <li><a href="#" class="open-reservation-modal btn-primary" data-cms-link="nav-mobile-btn">Réservation</a></li>
             </ul>
         </div>
     </div>
@@ -89,9 +167,8 @@
             <p class="fade-in-up delay-2">Découvrez notre cuisine française savoureuse dans un cadre majestueux au cœur
                 de Cergy-Port.</p>
             <div class="hero-buttons fade-in-up delay-3">
-                <a href="https://reservation.dish.co/widget/hydra-e025b23d-362b-4d54-89ee-29dfd908bef2" target="_blank"
-                    class="btn-primary">Réserver une table</a>
-                <a href="#" class="btn-secondary open-menu-modal">Découvrir la carte</a>
+                <a href="#" class="btn-primary open-reservation-modal" data-cms-link="hero-btn-1">Réserver une table</a>
+                <a href="https://latavernedesrois.fr/wp-content/uploads/2025/02/Menu-25x33-AH-2025-1.pdf" target="_blank" class="btn-secondary" data-cms-link="hero-btn-2">Découvrir la carte</a>
             </div>
         </div>
     </section>
@@ -131,89 +208,57 @@
             </div>
             <div class="gallery-grid">
                 <div class="gallery-item tilt-effect">
-                    <img src="assets/images/gallery_seafood.png" alt="Plateau de fruits de mer">
+                    <img src="assets/images/gallery_capaccio.png" alt="Carpaccio de bœuf, roquette et parmesan">
                     <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
                 </div>
                 <div class="gallery-item tilt-effect">
-                    <img src="assets/images/gallery_burger.png" alt="Burger Gourmet">
+                    <img src="assets/images/gallery_burger_real.jpg" alt="Burger maison et frites">
                     <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
                 </div>
                 <div class="gallery-item tilt-effect">
-                    <img src="assets/images/gallery_dessert.png" alt="Dessert Chocolat">
+                    <img src="assets/images/gallery_burrata.png" alt="Burrata, tomates cerises et basilic">
                     <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
                 </div>
                 <div class="gallery-item tilt-effect">
-                    <img src="assets/images/cocktail_1.png" alt="Cocktail élégant">
+                    <img src="assets/images/gallery_mocktails.png" alt="Cocktails frais à la menthe">
                     <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
                 </div>
                 <div class="gallery-item tilt-effect">
-                    <img src="assets/images/hero_bg.png" alt="Intérieur du restaurant">
+                    <img src="assets/images/gallery_terrasse.png" alt="Terrasse d'été en bord de l'Oise">
                     <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
                 </div>
                 <div class="gallery-item tilt-effect">
-                    <img src="assets/images/dish_1.png" alt="Plat Gourmet">
+                    <img src="assets/images/gallery_dorade.png" alt="Dorade grillée, légumes de saison">
+                    <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gallery-item tilt-effect">
+                    <img src="assets/images/gallery_interieur.jpg" alt="Intérieur chaleureux du restaurant">
+                    <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gallery-item tilt-effect">
+                    <img src="assets/images/gallery_salade_melon.png" alt="Salade melon, jambon cru et burrata">
+                    <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gallery-item tilt-effect">
+                    <img src="assets/images/gallery_mocktail.png" alt="Mocktail artisanal">
                     <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Actualités Section -->
-    <section id="actualites" class="section dark-section pattern-bg">
-        <div class="container">
-            <div class="section-header center">
-                <h3 class="subtitle">Découvrez tous nos événements à venir !</h3>
-                <h2>Actualités & Événements</h2>
-                <p>Mixez plaisir culinaire et animations ! Retransmissions en live sur écrans géants, dîner-spectacle,
-                    concert et DJ set.</p>
-            </div>
-            <div class="news-grid">
-                <!-- Fallback info since Instagram feed was broken -->
-                <div class="news-card">
-                    <div class="news-image">
-                        <img src="assets/images/cocktail_1.png" alt="Soirée Cocktail">
-                        <div class="news-date"><span>14</span>Mar</div>
-                    </div>
-                    <div class="news-content">
-                        <h4>Soirée DJ Set & Cocktails</h4>
-                        <p>Venez profiter d'une ambiance lounge et de nos cocktails signatures avec notre DJ résident
-                            pour bien commencer le week-end.</p>
-                        <a href="#" class="read-more">En savoir plus <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="news-card">
-                    <div class="news-image">
-                        <img src="assets/images/diner_spectacle.png" alt="Dîner-Spectacle Live Music">
-                        <div class="news-date"><span>21</span>Mar</div>
-                    </div>
-                    <div class="news-content">
-                        <h4>Dîner-Spectacle Live Music</h4>
-                        <p>Savourez notre nouveau menu de printemps en profitant d'un concert live du groupe "Funky
-                            Train" toute la soirée.</p>
-                        <a href="#" class="read-more">En savoir plus <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="news-card">
-                    <div class="news-image">
-                        <img src="assets/images/champions_league.png" alt="Soirée Champions League">
-                        <div class="news-date"><span>28</span>Mar</div>
-                    </div>
-                    <div class="news-content">
-                        <h4>Soirée Champions League</h4>
-                        <p>Retransmission en direct du match sur écrans géants ! Menu spécial Burger & Bière disponible
-                            pour l'événement.</p>
-                        <a href="#" class="read-more">En savoir plus <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container footer-grid">
             <div class="footer-col brand-col">
-                <p>Au cœur de Cergy-Port, La Taverne des Rois est un lieu unique avec un charme incomparable.</p>
+                <h4><i class="fas fa-clock"></i> Horaires d'ouverture</h4>
+                <ul class="opening-hours">
+                    <li><span>Dim – Jeu</span><span>10h00 – 23h15</span></li>
+                    <li><span>Ven – Sam</span><span>10h00 – 00h15</span></li>
+                    <li class="opening-hours-note"><i class="fas fa-utensils"></i> Dernières commandes cuisine : 22h15 (dim-jeu) · 23h15 (ven-sam)</li>
+                </ul>
                 <div class="social-links">
                     <a href="https://www.facebook.com/latavernedesrois" target="_blank" aria-label="Facebook"><i
                             class="fab fa-facebook-f"></i></a>
@@ -231,11 +276,11 @@
             <div class="footer-col links-col">
                 <h4>Liens Utiles</h4>
                 <ul>
-                    <li><a href="#restaurant">Restaurant</a></li>
-                    <li><a href="#" class="open-menu-modal">La carte</a></li>
-                    <li><a href="#" class="open-privatization-modal">Privatisation</a></li>
-                    <li><a href="#">Mentions légales</a></li>
-                    <li><a href="#">Données personnelles</a></li>
+                    <li><a href="#restaurant" data-cms-link="footer-link-1">Restaurant</a></li>
+                    <li><a href="https://latavernedesrois.fr/wp-content/uploads/2025/02/Menu-25x33-AH-2025-1.pdf" target="_blank" data-cms-link="footer-link-2">La carte</a></li>
+                    <li><a href="#galerie" data-cms-link="footer-link-3">Galerie</a></li>
+                    <li><a href="#" data-cms-link="footer-link-4">Mentions légales</a></li>
+                    <li><a href="#" data-cms-link="footer-link-5">Données personnelles</a></li>
                 </ul>
             </div>
         </div>
@@ -246,607 +291,136 @@
 
     <!-- MODALS -->
 
-    <!-- Menu Modal (La Carte) -->
-    <div class="modal" id="menu-modal">
-        <div class="modal-backdrop close-menu-modal"></div>
-        <div class="modal-content large-modal glass-effect">
-            <button class="modal-close close-menu-modal"><i class="fas fa-times"></i></button>
-            <div class="modal-header">
-                <h2>La Carte</h2>
-                <p class="subtitle">Des produits frais cuisinés avec amour !</p>
-            </div>
-            <div class="modal-body">
-                <div class="menu-categories">
-                    <button class="menu-tab active" data-target="platdujour">✨ Plat du Jour</button>
-                    <button class="menu-tab" data-target="entrees">Entrées</button>
-                    <button class="menu-tab" data-target="plats">Plats</button>
-                    <button class="menu-tab" data-target="desserts">Desserts</button>
-                    <button class="menu-tab" data-target="boissons">Boissons</button>
-                </div>
+    <!-- Mentions Légales Modal -->
+    <div class="modal" id="mentions-modal">
+        <div class="modal-backdrop" id="backdrop-mentions"></div>
+        <div class="modal-content legal-content glass-effect">
+            <button class="modal-close" id="close-mentions-modal" aria-label="Fermer"><i class="fas fa-times"></i></button>
+            <h2>Mentions Légales</h2>
+            <div class="legal-text">
+                <h3>1. Éditeur du site</h3>
+                <p><strong>La Taverne des Rois</strong><br>
+                Adresse : 18 Quai de la Tourelle, 95000 CERGY<br>
+                Téléphone : 01 34 24 90 96</p>
 
-                <div class="menu-items-grid">
-                    <!-- Plat du Jour (Default) -->
-                    <div class="menu-section active" id="menu-platdujour">
-                        <div class="plat-du-jour-container">
-                            <!-- Midi -->
-                            <div class="pdj-block">
-                                <h3 class="pdj-title"><i class="fas fa-sun"></i> Le Midi</h3>
-                                <div class="pdj-items">
-                                    <div class="pdj-item">
-                                        <span class="pdj-label">Entrée du jour</span>
-                                        <span class="pdj-name">Velouté de butternut, crème de châtaigne</span>
-                                        <span class="pdj-price">8€</span>
-                                    </div>
-                                    <div class="pdj-item">
-                                        <span class="pdj-label">Plat du jour</span>
-                                        <span class="pdj-name">Suprême de volaille, jus réduit au thym, écrasé de pommes
-                                            de terre</span>
-                                        <span class="pdj-price">15€</span>
-                                    </div>
-                                    <div class="pdj-item">
-                                        <span class="pdj-label">Dessert du jour</span>
-                                        <span class="pdj-name">Tarte tatin tiède, boule de glace vanille</span>
-                                        <span class="pdj-price">8€</span>
-                                    </div>
-                                    <div class="pdj-item">
-                                        <span class="pdj-label">Cocktail du jour</span>
-                                        <span class="pdj-name">Spritz Royal — Prosecco, Aperol, orange sanguine</span>
-                                        <span class="pdj-price">9€</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Soir -->
-                            <div class="pdj-block">
-                                <h3 class="pdj-title"><i class="fas fa-moon"></i> Le Soir</h3>
-                                <div class="pdj-items">
-                                    <div class="pdj-item">
-                                        <span class="pdj-label">Entrée du jour</span>
-                                        <span class="pdj-name">Tartare de saumon, avocat, agrumes</span>
-                                        <span class="pdj-price">10€</span>
-                                    </div>
-                                    <div class="pdj-item">
-                                        <span class="pdj-label">Plat du jour</span>
-                                        <span class="pdj-name">Pavé de lieu noir, beurre citronné, riz basmati aux
-                                            herbes</span>
-                                        <span class="pdj-price">18€</span>
-                                    </div>
-                                    <div class="pdj-item">
-                                        <span class="pdj-label">Dessert du jour</span>
-                                        <span class="pdj-name">Moelleux au chocolat, cœur coulant, crème anglaise</span>
-                                        <span class="pdj-price">9€</span>
-                                    </div>
-                                    <div class="pdj-item">
-                                        <span class="pdj-label">Cocktail du jour</span>
-                                        <span class="pdj-name">Old Fashioned du Roi — Bourbon, angostura, zeste
-                                            d'orange</span>
-                                        <span class="pdj-price">11€</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Menus / Formules -->
-                            <div class="pdj-block pdj-menus">
-                                <h3 class="pdj-title"><i class="fas fa-crown"></i> Nos Formules</h3>
-                                <div class="pdj-formules">
-                                    <div class="pdj-formule-card">
-                                        <h4>Menu Découverte</h4>
-                                        <p>Entrée + Plat du jour <em>ou</em> Plat + Dessert du jour</p>
-                                        <span class="pdj-formule-price">19€</span>
-                                    </div>
-                                    <div class="pdj-formule-card highlight">
-                                        <div class="formule-badge">★ Populaire</div>
-                                        <h4>Menu Royal</h4>
-                                        <p>Entrée + Plat + Dessert du jour</p>
-                                        <span class="pdj-formule-price">26€</span>
-                                    </div>
-                                    <div class="pdj-formule-card">
-                                        <h4>Menu Complet</h4>
-                                        <p>Entrée + Plat + Dessert + Cocktail du jour</p>
-                                        <span class="pdj-formule-price">34€</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <h3>2. Hébergement</h3>
+                <p>Ce site est hébergé par <strong>Cloudflare, Inc.</strong><br>
+                101 Townsend St, San Francisco, CA 94107, USA</p>
 
-                    <!-- Entrees -->
-                    <div class="menu-section" id="menu-entrees" style="display: none;">
-                        <div class="plat-du-jour-container">
-                            <div class="pdj-block">
-                                <h3 class="pdj-title"><i class="fas fa-leaf"></i> Les Entrées</h3>
-                                <div class="pdj-items">
-                                    <div class="pdj-item"><span class="pdj-label">Huîtres</span><span
-                                            class="pdj-name">Huîtres Normandes Creuses N°3 — Les 6</span><span
-                                            class="pdj-price">12,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Huîtres</span><span
-                                            class="pdj-name">Huîtres Normandes Creuses N°3 — Les 12</span><span
-                                            class="pdj-price">23,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Soupe</span><span
-                                            class="pdj-name">Velouté du Moment</span><span
-                                            class="pdj-price">9,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Saumon</span><span
-                                            class="pdj-name">Fines tranches de saumon fumé par nos soins, salade
-                                            d'herbes fraîches, pain brioché tiédi & pickles</span><span
-                                            class="pdj-price">16,20€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Foie gras</span><span
-                                            class="pdj-name">Foie gras de Canard Maison & son chutney du jour, pain
-                                            brioché toasté</span><span class="pdj-price">19,20€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Classique</span><span
-                                            class="pdj-name">Le Véritable Œuf Mayonnaise, condiments &
-                                            pickles</span><span class="pdj-price">7,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Terrine</span><span
-                                            class="pdj-name">Terrine du Chef, condiments</span><span
-                                            class="pdj-price">8,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Maison</span><span
-                                            class="pdj-name">Nems "Finger" Maison, sucrine & menthe fraîche</span><span
-                                            class="pdj-price">8,90€</span></div>
-                                </div>
-                            </div>
-                            <div class="pdj-block">
-                                <h3 class="pdj-title"><i class="fas fa-seedling"></i> Nos Salades</h3>
-                                <div class="pdj-items">
-                                    <div class="pdj-item"><span class="pdj-label">Chèvre</span><span class="pdj-name">La
-                                            Chèvre Chaud — Salade, noix, toast de chèvre chaud rôti, tomates, figues
-                                            fraîches, miel doux</span><span class="pdj-price">18,00€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Poulet</span><span class="pdj-name">La
-                                            Caesar Poulet — Salade, filet de poulet mariné, croûtons aillés, copeaux de
-                                            parmesan, sauce César</span><span class="pdj-price">17,50€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Saumon</span><span class="pdj-name">La
-                                            Caesar Saumon — Salade, saumon, croûtons aillés, copeaux de parmesan, sauce
-                                            César</span><span class="pdj-price">18,50€</span></div>
-                                </div>
-                            </div>
-                            <div class="pdj-block">
-                                <h3 class="pdj-title"><i class="fas fa-utensils"></i> Planches à Partager</h3>
-                                <div class="pdj-items">
-                                    <div class="pdj-item"><span class="pdj-label">Apéro</span><span
-                                            class="pdj-name">Flammekueche Gratinée — Fine pâte croustillante, lardons,
-                                            oignons, crème fraîche, emmental</span><span class="pdj-price">12,90€</span>
-                                    </div>
-                                    <div class="pdj-item"><span class="pdj-label">Finger food</span><span
-                                            class="pdj-name">Planche Finger Food — Chicken wings, mozzarella sticks,
-                                            jalapeños, onion rings (par 12 / par 24)</span><span class="pdj-price">14€ /
-                                            26€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Mixte</span><span
-                                            class="pdj-name">Planche Taverne — Assortiment de charcuteries &
-                                            fromages</span><span class="pdj-price">20,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Charcuterie</span><span
-                                            class="pdj-name">Planche du Charcutier — Assortiment de
-                                            charcuteries</span><span class="pdj-price">19,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Fromage</span><span
-                                            class="pdj-name">Planche du Fromager — Assortiment de fromages</span><span
-                                            class="pdj-price">19,90€</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Plats (Hidden) -->
-                    <div class="menu-section" id="menu-plats" style="display: none;">
-                        <div class="plat-du-jour-container">
-                            <div class="pdj-block">
-                                <h3 class="pdj-title"><i class="fas fa-hamburger"></i> Les Burgers</h3>
-                                <p class="pdj-subtitle">Steaks hachés de bœuf frais, origine France (~150g), servis avec
-                                    frites maison</p>
-                                <div class="pdj-items">
-                                    <div class="pdj-item"><span class="pdj-label">Classique</span><span
-                                            class="pdj-name">L'Original — Steak, tomate fraîche, salade, oignon rouge,
-                                            sauce burger, cheddar</span><span class="pdj-price">16,50€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Signature</span><span
-                                            class="pdj-name">Le Signature — Effiloché de bœuf croustillant, oignons
-                                            confits, salade, tomate, sauce tartare</span><span
-                                            class="pdj-price">18,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Premium</span><span
-                                            class="pdj-name">Le Burger des Rois — Steak, tomate, salade, oignon confit,
-                                            gouda truffé</span><span class="pdj-price">19,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Poulet</span><span class="pdj-name">Le
-                                            Chicken Burger — Filet de poulet pané, tomate, oignon confit,
-                                            cheddar</span><span class="pdj-price">16,00€</span></div>
-                                </div>
-                            </div>
-                            <div class="pdj-block">
-                                <h3 class="pdj-title"><i class="fas fa-drumstick-bite"></i> Le Coin du Boucher</h3>
-                                <p class="pdj-subtitle">Toutes nos viandes bovines sont d'origine française</p>
-                                <div class="pdj-items">
-                                    <div class="pdj-item"><span class="pdj-label">Bœuf</span><span
-                                            class="pdj-name">Entrecôte de Bœuf (~300g), frites maison &
-                                            salade</span><span class="pdj-price">27,60€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Agneau</span><span
-                                            class="pdj-name">Souris d'Agneau Confite & son jus court, purée de patate
-                                            douce au gingembre</span><span class="pdj-price">22,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Canard</span><span
-                                            class="pdj-name">Confit de Canard Maison, pommes grenailles sautées à l'ail
-                                            et persil</span><span class="pdj-price">21,80€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Tartare</span><span
-                                            class="pdj-name">Tartare de Bœuf Charolais (~180g) au couteau, préparé par
-                                            nos soins, frites maison</span><span class="pdj-price">18,50€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Bœuf</span><span class="pdj-name">Pavé
-                                            de Cœur de Rumsteak (~180g), frites maison & salade</span><span
-                                            class="pdj-price">19,80€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Bœuf</span><span
-                                            class="pdj-name">Onglet de Bœuf (~180g) & son jus corsé, frites maison &
-                                            salade</span><span class="pdj-price">18,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Volaille</span><span
-                                            class="pdj-name">Suprême de Volaille & sa sauce poulette, cuisson basse
-                                            température, légumes de saison</span><span class="pdj-price">17,80€</span>
-                                    </div>
-                                    <div class="pdj-item"><span class="pdj-label">Bœuf</span><span
-                                            class="pdj-name">Croustillant de Bœuf & sa sauce tartare, purée
-                                            gourmande</span><span class="pdj-price">18,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Porc</span><span
-                                            class="pdj-name">Andouillette rôtie aux oignons confits, frites
-                                            maison</span><span class="pdj-price">17,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Porc</span><span
-                                            class="pdj-name">Jarret braisé à la bière & sa sauce au poivre, frites
-                                            maison</span><span class="pdj-price">26,50€</span></div>
-                                </div>
-                            </div>
-                            <div class="pdj-block">
-                                <h3 class="pdj-title"><i class="fas fa-fish"></i> Les Poissons</h3>
-                                <div class="pdj-items">
-                                    <div class="pdj-item"><span class="pdj-label">Cabillaud</span><span
-                                            class="pdj-name">Pavé de Cabillaud Nacré & son émulsion citronnelle, purée
-                                            de patate douce au gingembre</span><span class="pdj-price">23,00€</span>
-                                    </div>
-                                    <div class="pdj-item"><span class="pdj-label">Bar</span><span class="pdj-name">Filet
-                                            de Bar à la Plancha & son beurre nantais au curcuma, poêlée de
-                                            blettes</span><span class="pdj-price">18,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Fish & Chips</span><span
-                                            class="pdj-name">Fish & Chips Maison, frites & sauce tartare</span><span
-                                            class="pdj-price">19,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Gambas</span><span
-                                            class="pdj-name">Risotto aux Gambas & sa bisque, herbes fraîches & tuiles de
-                                            parmesan</span><span class="pdj-price">19,90€</span></div>
-                                </div>
-                            </div>
-                            <div class="pdj-block">
-                                <h3 class="pdj-title"><i class="fas fa-beer"></i> Les Choucroutes</h3>
-                                <p class="pdj-subtitle">Travaillée, assaisonnée et préparée par nos cuisiniers chaque
-                                    jour</p>
-                                <div class="pdj-items">
-                                    <div class="pdj-item"><span class="pdj-label">Classique</span><span
-                                            class="pdj-name">La Taverne — Saucisse de Francfort, saucisse fumée,
-                                            poitrine fumée, saucisson à l'ail, PDT vapeur</span><span
-                                            class="pdj-price">21,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Porc</span><span class="pdj-name">La
-                                            Jarret — Jarret de porc, choucroute, pommes de terre vapeur</span><span
-                                            class="pdj-price">26,50€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Mer</span><span class="pdj-name">La
-                                            Choucroute de la Mer au Curcuma — Haddock, saumon, poisson blanc, moules,
-                                            beurre nantais</span><span class="pdj-price">27,90€</span></div>
-                                </div>
-                            </div>
-                            <div class="pdj-block">
-                                <h3 class="pdj-title"><i class="fas fa-pizza-slice"></i> Les Pizzas</h3>
-                                <div class="pdj-items">
-                                    <div class="pdj-item"><span class="pdj-label">Classique</span><span
-                                            class="pdj-name">La Reine — Sauce tomate, mozzarella, anchois, câpres,
-                                            olives noires, origan</span><span class="pdj-price">17,50€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Végé</span><span class="pdj-name">La
-                                            Végétarienne — Sauce tomate, mozzarella, tomate fraîche, poivrons,
-                                            courgettes, aubergines</span><span class="pdj-price">16,50€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Premium</span><span
-                                            class="pdj-name">La Parme — Sauce tomate, mozzarella, jambon cru, roquette,
-                                            parmesan, balsamique</span><span class="pdj-price">17,50€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Fromage</span><span
-                                            class="pdj-name">La Quatro Fromagi — Gorgonzola, chèvre, mozzarella,
-                                            camembert</span><span class="pdj-price">17,00€</span></div>
-                                </div>
-                            </div>
-                            <div class="pdj-block">
-                                <h3 class="pdj-title"><i class="fas fa-globe-asia"></i> Autour du Monde</h3>
-                                <div class="pdj-items">
-                                    <div class="pdj-item"><span class="pdj-label">Gambas</span><span
-                                            class="pdj-name">Wok de Gambas — Légumes croquants au wok, soja, gingembre,
-                                            coriandre, sésame</span><span class="pdj-price">20,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Poulet</span><span
-                                            class="pdj-name">Wok de Poulet — Légumes croquants au wok, soja, gingembre,
-                                            coriandre, sésame</span><span class="pdj-price">19,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Végé</span><span class="pdj-name">Wok
-                                            Végétarien — Légumes croquants au wok, coriandre, ail, sésame</span><span
-                                            class="pdj-price">18,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Thaï</span><span
-                                            class="pdj-name">Linguine de Bœuf façon Thaï — Linguine, émincé de bœuf,
-                                            carottes, courgettes, soja, sésame</span><span
-                                            class="pdj-price">19,30€</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Desserts (Hidden) -->
-                    <div class="menu-section" id="menu-desserts" style="display: none;">
-                        <div class="plat-du-jour-container">
-                            <div class="pdj-block">
-                                <h3 class="pdj-title"><i class="fas fa-birthday-cake"></i> Les Desserts Classiques</h3>
-                                <div class="pdj-items">
-                                    <div class="pdj-item"><span class="pdj-label">Fromage</span><span
-                                            class="pdj-name">Assiette du Fromager — Brie truffé, tomme de Savoie, St
-                                            Maure de Touraine</span><span class="pdj-price">8,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Exotique</span><span
-                                            class="pdj-name">Crumble des Îles — Saveur passion avec morceaux de mangue &
-                                            glace coco</span><span class="pdj-price">8,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Maison</span><span
-                                            class="pdj-name">Paris Brest Maison — Chou, crème pralinée & éclats de
-                                            noisettes</span><span class="pdj-price">8,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Maison</span><span
-                                            class="pdj-name">Tarte Tatin Maison, crème fraîche</span><span
-                                            class="pdj-price">8,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Maison</span><span
-                                            class="pdj-name">Crème Brûlée Maison à la cassonade</span><span
-                                            class="pdj-price">8,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Maison</span><span
-                                            class="pdj-name">Tiramisu du Moment</span><span
-                                            class="pdj-price">8,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Maison</span><span
-                                            class="pdj-name">Clafoutis aux Pommes & Noix de Pécan, glace vanille &
-                                            caramel beurre salé</span><span class="pdj-price">8,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Chef</span><span
-                                            class="pdj-name">L'Incroyable Pain Perdu du Chef, glace vanille & caramel
-                                            beurre salé</span><span class="pdj-price">8,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Classique</span><span
-                                            class="pdj-name">Profiteroles au Chocolat, crème anglaise</span><span
-                                            class="pdj-price">8,90€</span></div>
-                                </div>
-                            </div>
-                            <div class="pdj-block">
-                                <h3 class="pdj-title"><i class="fas fa-ice-cream"></i> Les Coupes Glacées</h3>
-                                <div class="pdj-items">
-                                    <div class="pdj-item"><span class="pdj-label">Classique</span><span
-                                            class="pdj-name">Dame Blanche — 3 boules vanille, sauce chocolat chaud,
-                                            crème fouettée</span><span class="pdj-price">8,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Liégeois</span><span
-                                            class="pdj-name">Chocolat ou Café ou Caramel Liégeois, crème
-                                            fouettée</span><span class="pdj-price">8,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Gourmand</span><span
-                                            class="pdj-name">Coupe façon Bounty® — Sorbet cacao, crème glacée coco,
-                                            chocolat chaud, coco râpée</span><span class="pdj-price">8,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Gourmand</span><span
-                                            class="pdj-name">Coupe Vertige — Glacée pistache, menthe chocolat, chocolat
-                                            chaud, cacahuètes</span><span class="pdj-price">8,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Gourmand</span><span
-                                            class="pdj-name">Coupe façon Snickers® — Glacée cacahuète chocolat, vanille,
-                                            caramel fleur de sel</span><span class="pdj-price">9,10€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Alcool</span><span
-                                            class="pdj-name">L'After Eight — Menthe chocolat, chocolat noir, Get
-                                            27</span><span class="pdj-price">9,20€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Alcool</span><span
-                                            class="pdj-name">Colonel — 2 boules sorbet citron, vodka</span><span
-                                            class="pdj-price">8,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Alcool</span><span
-                                            class="pdj-name">Piña Colada Glacée — Sorbet ananas, coco, rhum blanc
-                                            agricole</span><span class="pdj-price">8,90€</span></div>
-                                </div>
-                            </div>
-                            <div class="pdj-block">
-                                <h3 class="pdj-title"><i class="fas fa-cookie"></i> Crêpes & Gourmands</h3>
-                                <div class="pdj-items">
-                                    <div class="pdj-item"><span class="pdj-label">Crêpe</span><span
-                                            class="pdj-name">Crêpe au Sucre</span><span class="pdj-price">5,50€</span>
-                                    </div>
-                                    <div class="pdj-item"><span class="pdj-label">Crêpe</span><span
-                                            class="pdj-name">Crêpe Nutella® ou Chocolat ou Caramel</span><span
-                                            class="pdj-price">7,00€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Crêpe</span><span
-                                            class="pdj-name">Crêpe Nutella® ou Chocolat / Banane</span><span
-                                            class="pdj-price">8,00€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Gourmand</span><span
-                                            class="pdj-name">Café Gourmand</span><span class="pdj-price">9,50€</span>
-                                    </div>
-                                    <div class="pdj-item"><span class="pdj-label">Gourmand</span><span
-                                            class="pdj-name">Thé Gourmand</span><span class="pdj-price">9,50€</span>
-                                    </div>
-                                    <div class="pdj-item"><span class="pdj-label">Gourmand</span><span
-                                            class="pdj-name">Chocolat Gourmand</span><span
-                                            class="pdj-price">9,50€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Gourmand</span><span
-                                            class="pdj-name">Irish Coffee Gourmand</span><span
-                                            class="pdj-price">13,20€</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Boissons (Hidden) -->
-                    <div class="menu-section" id="menu-boissons" style="display: none;">
-                        <div class="plat-du-jour-container">
-                            <div class="pdj-block">
-                                <h3 class="pdj-title"><i class="fas fa-cocktail"></i> Les Mojitos</h3>
-                                <div class="pdj-items">
-                                    <div class="pdj-item"><span class="pdj-label">Classique</span><span
-                                            class="pdj-name">Mojito — Rhum, citron vert, cassonade, menthe,
-                                            Perrier</span><span class="pdj-price">9,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Fruité</span><span
-                                            class="pdj-name">Mojito Framboise — Rhum, citron vert, velours framboise,
-                                            menthe</span><span class="pdj-price">11,00€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Fruité</span><span
-                                            class="pdj-name">Mojito Passion — Rhum, citron vert, velours passion,
-                                            menthe</span><span class="pdj-price">11,00€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Premium</span><span
-                                            class="pdj-name">Mojito Royal — Rhum, citron vert, cassonade, menthe,
-                                            Prosecco</span><span class="pdj-price">11,90€</span></div>
-                                </div>
-                            </div>
-                            <div class="pdj-block">
-                                <h3 class="pdj-title"><i class="fas fa-glass-cheers"></i> Nos Spritz</h3>
-                                <div class="pdj-items">
-                                    <div class="pdj-item"><span class="pdj-label">Classique</span><span
-                                            class="pdj-name">Le Classique — Aperitivo, Prosecco, Perrier</span><span
-                                            class="pdj-price">8,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Premium</span><span
-                                            class="pdj-name">Premium Spritz Limoncello — Limoncello, Prosecco,
-                                            Perrier</span><span class="pdj-price">9,30€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Premium</span><span
-                                            class="pdj-name">Premium Spritz Saint Germain — Liqueur St Germain,
-                                            Prosecco, Perrier</span><span class="pdj-price">10,90€</span></div>
-                                </div>
-                            </div>
-                            <div class="pdj-block">
-                                <h3 class="pdj-title"><i class="fas fa-magic"></i> Cocktails Signature</h3>
-                                <div class="pdj-items">
-                                    <div class="pdj-item"><span class="pdj-label">Signature</span><span
-                                            class="pdj-name">Le Fantasme — Gin, velours de passion, liqueur St Germain,
-                                            citron</span><span class="pdj-price">9,80€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Signature</span><span
-                                            class="pdj-name">Bombay Sapphire & Tonic — Gin Bombay Sapphire, citron vert,
-                                            Schweppes</span><span class="pdj-price">9,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Signature</span><span
-                                            class="pdj-name">Chaleur Tropicale — Rhum, Malibu, Ginger Beer, velours
-                                            passion</span><span class="pdj-price">9,60€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Signature</span><span
-                                            class="pdj-name">Banana Forever — Malibu, Soho, purée de banane, jus
-                                            d'ananas</span><span class="pdj-price">9,80€</span></div>
-                                </div>
-                            </div>
-                            <div class="pdj-block">
-                                <h3 class="pdj-title"><i class="fas fa-wine-glass-alt"></i> La Cave — Vins Rouges</h3>
-                                <div class="pdj-items">
-                                    <div class="pdj-item"><span class="pdj-label">Loire</span><span
-                                            class="pdj-name">Saumur AOP — Cabernet Franc "Les Plantagenêts"</span><span
-                                            class="pdj-price">25,00€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Languedoc</span><span
-                                            class="pdj-name">Pic Saint-Loup AOP — "Altitude 192 - Terre
-                                            Haute"</span><span class="pdj-price">32,80€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Beaujolais</span><span
-                                            class="pdj-name">Brouilly AOC — "Château des Tours"</span><span
-                                            class="pdj-price">30,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Bordeaux</span><span
-                                            class="pdj-name">Haut-Médoc AOC — "Château Victoria"</span><span
-                                            class="pdj-price">32,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Bordeaux</span><span
-                                            class="pdj-name">Montagne Saint-Émilion AOC — "Château Bel-Air"</span><span
-                                            class="pdj-price">29,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Bordeaux</span><span
-                                            class="pdj-name">Saint-Estèphe AOC — "Château Rocher Coutelin"</span><span
-                                            class="pdj-price">49,00€</span></div>
-                                </div>
-                            </div>
-                            <div class="pdj-block">
-                                <h3 class="pdj-title"><i class="fas fa-wine-bottle"></i> Vins Blancs & Rosés</h3>
-                                <div class="pdj-items">
-                                    <div class="pdj-item"><span class="pdj-label">Bourgogne</span><span
-                                            class="pdj-name">Bourgogne Blanc Aligoté AOC — "Les Planchants"</span><span
-                                            class="pdj-price">28,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Bourgogne</span><span
-                                            class="pdj-name">Chablis AOP — "Famille Gueguen"</span><span
-                                            class="pdj-price">41,00€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Alsace</span><span
-                                            class="pdj-name">Riesling AOC — "Hans Schaeffer"</span><span
-                                            class="pdj-price">25,00€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Alsace</span><span
-                                            class="pdj-name">Gewurztraminer AOC — "Hans Schaeffer"</span><span
-                                            class="pdj-price">32,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Rosé</span><span
-                                            class="pdj-name">Côtes de Provence AOC — "Soif de Pampa"</span><span
-                                            class="pdj-price">27,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Rosé</span><span class="pdj-name">Côte
-                                            de Provence AOC — "Minuty Prestige"</span><span
-                                            class="pdj-price">44,90€</span></div>
-                                </div>
-                            </div>
-                            <div class="pdj-block">
-                                <h3 class="pdj-title"><i class="fas fa-star"></i> Champagnes & Effervescents</h3>
-                                <div class="pdj-items">
-                                    <div class="pdj-item"><span class="pdj-label">Prosecco</span><span
-                                            class="pdj-name">Prosecco Extra Dry (verre / bouteille)</span><span
-                                            class="pdj-price">5,90€ / 32,90€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Champagne</span><span
-                                            class="pdj-name">Champagne Sélection Maison (verre / bouteille)</span><span
-                                            class="pdj-price">9€ / 55€</span></div>
-                                    <div class="pdj-item"><span class="pdj-label">Prestige</span><span
-                                            class="pdj-name">R de Ruinart</span><span class="pdj-price">150,00€</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <a href="https://latavernedesrois.fr/wp-content/uploads/2025/02/Menu-25x33-AH-2025-1.pdf"
-                    target="_blank" class="btn-outline"><i class="fas fa-file-pdf"></i> Télécharger la carte
-                    complète</a>
+                <h3>3. Propriété intellectuelle</h3>
+                <p>L'ensemble de ce site relève de la législation française et internationale sur le droit d'auteur et la propriété intellectuelle. Tous les droits de reproduction sont réservés.</p>
             </div>
         </div>
     </div>
 
-    <!-- Privatization Modal -->
-    <div class="modal" id="privatization-modal">
-        <div class="modal-backdrop close-privatization-modal"></div>
+    <!-- Données Personnelles Modal -->
+    <div class="modal" id="donnees-modal">
+        <div class="modal-backdrop" id="backdrop-donnees"></div>
+        <div class="modal-content legal-content glass-effect">
+            <button class="modal-close" id="close-donnees-modal" aria-label="Fermer"><i class="fas fa-times"></i></button>
+            <h2>Données Personnelles</h2>
+            <div class="legal-text">
+                <h3>Politique de confidentialité</h3>
+                <p>Dans le cadre des réservations de groupes, La Taverne des Rois collecte les informations suivantes : nom, adresse e-mail et numéro de téléphone. Ces données sont utilisées exclusivement pour traiter votre demande de réservation.</p>
+                
+                <h3>Vos droits</h3>
+                <p>Conformément à la loi "Informatique et Libertés" et au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour exercer ce droit, veuillez nous contacter par téléphone ou sur place.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reservation Modal -->
+    <div class="modal" id="reservation-modal">
+        <div class="modal-backdrop close-reservation-modal"></div>
         <div class="modal-content form-modal glass-effect">
-            <button class="modal-close close-privatization-modal"><i class="fas fa-times"></i></button>
+            <button class="modal-close close-reservation-modal"><i class="fas fa-times"></i></button>
             <div class="modal-header">
-                <h2>Privatisation</h2>
-                <p class="subtitle">Gagnez du temps et de l’argent, en privatisant La Taverne des Rois</p>
+                <h2>Réservation</h2>
+                <p class="subtitle">Choisissez votre type de réservation</p>
             </div>
             <div class="modal-body">
-                <form id="privatization-form" class="custom-form">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="nom">Nom*</label>
-                            <input type="text" id="nom" required placeholder="Votre nom">
+                <!-- Step 1: Choice -->
+                <div id="reservation-choice" class="reservation-choice">
+                    <a href="https://reservation.dish.co/widget/hydra-e025b23d-362b-4d54-89ee-29dfd908bef2" target="_blank" class="reservation-option-card" id="btn-small-group">
+                        <div class="reservation-option-icon"><i class="fas fa-user-friends"></i></div>
+                        <h3>Moins de 16 personnes</h3>
+                        <p>Réservez directement en ligne via notre partenaire Dish</p>
+                        <span class="reservation-option-cta">Réserver en ligne <i class="fas fa-arrow-right"></i></span>
+                    </a>
+                    <button class="reservation-option-card" id="btn-large-group">
+                        <div class="reservation-option-icon"><i class="fas fa-users"></i></div>
+                        <h3>16 personnes ou plus</h3>
+                        <p>Contactez-nous pour organiser votre événement</p>
+                        <span class="reservation-option-cta">Remplir le formulaire <i class="fas fa-arrow-right"></i></span>
+                    </button>
+                </div>
+
+                <!-- Step 2: Group Form (hidden by default) -->
+                <div id="reservation-group-form" class="reservation-group-form" style="display: none;">
+                    <button class="reservation-back-btn" id="reservation-back"><i class="fas fa-arrow-left"></i> Retour</button>
+                    <form id="group-reservation-form" class="custom-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="grp-nom">Nom*</label>
+                                <input type="text" id="grp-nom" required placeholder="Votre nom">
+                            </div>
+                            <div class="form-group">
+                                <label for="grp-prenom">Prénom*</label>
+                                <input type="text" id="grp-prenom" required placeholder="Votre prénom">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="prenom">Prénom*</label>
-                            <input type="text" id="prenom" required placeholder="Votre prénom">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="grp-tel">Téléphone*</label>
+                                <input type="tel" id="grp-tel" required placeholder="06 12 34 56 78">
+                            </div>
+                            <div class="form-group">
+                                <label for="grp-email">E-mail*</label>
+                                <input type="email" id="grp-email" required placeholder="email@exemple.com">
+                            </div>
                         </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="grp-date">Date souhaitée*</label>
+                                <input type="date" id="grp-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="grp-personnes">Nombre de personnes*</label>
+                                <input type="number" id="grp-personnes" min="16" max="250" required placeholder="Ex: 25">
+                            </div>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="grp-message">Commentaire</label>
+                            <textarea id="grp-message" rows="3" placeholder="Parlez-nous de votre événement..."></textarea>
+                        </div>
+                        <div class="form-submit">
+                            <button type="submit" class="btn-primary full-width">Envoyer la demande</button>
+                        </div>
+                    </form>
+                    <div id="group-form-success" style="display: none;" class="success-message">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Demande envoyée !</h3>
+                        <p>Nous vous recontacterons dans les plus brefs délais.</p>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="tel">Téléphone*</label>
-                            <input type="tel" id="tel" required placeholder="06 12 34 56 78">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Adresse e-mail*</label>
-                            <input type="email" id="email" required placeholder="email@exemple.com">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="date">Date souhaitée*</label>
-                            <input type="date" id="date" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="heure">Heure*</label>
-                            <select id="heure" required>
-                                <option value="" disabled selected>Sélectionnez une heure</option>
-                                <option value="11h">11h00</option>
-                                <option value="12h">12h00</option>
-                                <option value="13h">13h00</option>
-                                <option value="19h">19h00</option>
-                                <option value="20h">20h00</option>
-                                <option value="21h">21h00</option>
-                                <option value="autre">Autre (préciser en commentaire)</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="personnes">Nombre de personnes* (30 à 250)</label>
-                            <input type="number" id="personnes" min="30" max="250" required placeholder="Ex: 50">
-                        </div>
-                        <div class="form-group">
-                            <label for="budget">Budget par personne</label>
-                            <input type="number" id="budget" placeholder="Min. 25€">
-                        </div>
-                    </div>
-                    <div class="form-group full-width">
-                        <label for="message">Commentaire</label>
-                        <textarea id="message" rows="3" placeholder="Parlez-nous de votre événement..."></textarea>
-                    </div>
-                    <div class="form-submit">
-                        <button type="submit" class="btn-primary full-width">Envoyer la demande</button>
-                    </div>
-                </form>
-                <div id="form-success-msg" style="display: none;" class="success-message">
-                    <i class="fas fa-check-circle"></i>
-                    <h3>Demande envoyée !</h3>
-                    <p>Nous vous recontacterons dans les plus brefs délais.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Reservation links now point directly to the real Dish widget -->
+    <!-- Dish Photo Lightbox -->
+    <div id="dish-photo-lightbox" class="dish-photo-lightbox">
+        <div class="dish-photo-backdrop"></div>
+        <button class="dish-photo-close"><i class="fas fa-times"></i></button>
+        <div class="dish-photo-container">
+            <h3 class="dish-photo-title"></h3>
+            <div class="dish-photo-frame">
+                <img id="dish-photo-img" src="" alt="Photo du plat">
+                <button id="cms-dish-replace-btn" class="cms-dish-replace-btn" style="display:none;">
+                    <i class="fas fa-camera"></i> Remplacer l'image
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Gallery Lightbox -->
     <div id="gallery-lightbox" class="lightbox">
