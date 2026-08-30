@@ -1,790 +1,203 @@
 {
-    "hero": {
-        "background_image": "/assets/images/hero_bg.png",
-        "logo": "/assets/images/logo_transparent.png",
-        "title_line1": "Royale par son nom,",
-        "title_line2": "unique par ses saveurs",
-        "subtitle": "Découvrez notre cuisine française savoureuse dans un cadre majestueux au cœur de Cergy-Port.",
-        "reservation_url": "https://reservation.dish.co/widget/hydra-e025b23d-362b-4d54-89ee-29dfd908bef2",
-        "reservation_text": "Réserver une table",
-        "menu_text": "Découvrir la carte"
-    },
-    "restaurant": {
-        "subtitle": "Restaurant Port Cergy – Cuisine française",
-        "title": "Brasserie La Taverne des Rois",
-        "paragraphs": [
-            "La Taverne des Rois, digne successeur de « La Taverne de Port Cergy », est un pub-brasserie qui a fait ses preuves et qui s'inscrit dans le patrimoine de Cergy-Port depuis maintenant 30 ans.",
-            "Situé sur les rives de l'Oise et dominant le charmant petit port de Cergy, le cadre est royal pour venir manger en famille ou encore pour prendre l'apéritif.",
-            "Poussez les portes de La Taverne des Rois et retrouvez la recette du bonheur. Vous profitez d'une ambiance chaleureuse et lounge, le tout saupoudrer d'une décoration particulièrement soignée dans les tons feutrés.",
-            "Afin de vous concocter les meilleurs plats, notre chef cuisinier travaille uniquement avec des produits frais et une viande racée soigneusement sélectionnée. Vous vous régalerez par exemple avec notre carte de burgers 100% maison et nos poissons frais livrés au quotidien."
-        ],
-        "image": "/assets/images/restaurant_interior.jpg"
-    },
-    "gallery": {
-        "subtitle": "Parce qu'une image vaut mille mots",
-        "title": "Notre Galerie",
-        "description": "Un spectacle aussi bien en cuisine qu'en salle !",
-        "images": [
-            {
-                "src": "/assets/images/gallery_capaccio.png",
-                "alt": "Carpaccio de bœuf, roquette et parmesan"
-            },
-            {
-                "src": "/assets/images/gallery_burger_real.jpg",
-                "alt": "Burger maison et frites"
-            },
-            {
-                "src": "/assets/images/gallery_burrata.png",
-                "alt": "Burrata, tomates cerises et basilic"
-            },
-            {
-                "src": "/assets/images/gallery_mocktails.png",
-                "alt": "Cocktails frais à la menthe"
-            },
-            {
-                "src": "/assets/images/gallery_terrasse.png",
-                "alt": "Terrasse d'été en bord de l'Oise"
-            },
-            {
-                "src": "/assets/images/gallery_dorade.png",
-                "alt": "Dorade grillée, légumes de saison"
-            },
-            {
-                "src": "/assets/images/gallery_interieur.jpg",
-                "alt": "Intérieur chaleureux du restaurant"
-            },
-            {
-                "src": "/assets/images/gallery_salade_melon.png",
-                "alt": "Salade melon, jambon cru et burrata"
-            },
-            {
-                "src": "/assets/images/gallery_mocktail.png",
-                "alt": "Mocktail artisanal"
-            }
-        ]
-    },
-    "actualites": {
-        "subtitle": "Découvrez tous nos événements à venir !",
-        "title": "Actualités & Événements",
-        "description": "Mixez plaisir culinaire et animations ! Retransmissions en live sur écrans géants, dîner-spectacle, concert et DJ set.",
-        "events": [
-            {
-                "image": "/assets/images/cocktail_1.png",
-                "date_day": "14",
-                "date_month": "Mar",
-                "title": "Soirée DJ Set & Cocktails",
-                "description": "Venez profiter d'une ambiance lounge et de nos cocktails signatures avec notre DJ résident pour bien commencer le week-end."
-            },
-            {
-                "image": "/assets/images/diner_spectacle.png",
-                "date_day": "21",
-                "date_month": "Mar",
-                "title": "Dîner-Spectacle Live Music",
-                "description": "Savourez notre nouveau menu de printemps en profitant d'un concert live du groupe \"Funky Train\" toute la soirée."
-            },
-            {
-                "image": "/assets/images/champions_league.png",
-                "date_day": "28",
-                "date_month": "Mar",
-                "title": "Soirée Champions League",
-                "description": "Retransmission en direct du match sur écrans géants ! Menu spécial Burger & Bière disponible pour l'événement."
-            }
-        ]
-    },
-    "menu_plat_du_jour": {
-        "midi": {
-            "entree": {
-                "name": "Velouté de butternut, crème de châtaigne",
-                "price": "8€"
-            },
-            "plat": {
-                "name": "Suprême de volaille, jus réduit au thym, écrasé de pommes de terre",
-                "price": "15€"
-            },
-            "dessert": {
-                "name": "Tarte tatin tiède, boule de glace vanille",
-                "price": "8€"
-            },
-            "cocktail": {
-                "name": "Spritz Royal — Prosecco, Aperol, orange sanguine",
-                "price": "9€"
-            }
-        },
-        "soir": {
-            "entree": {
-                "name": "Tartare de saumon, avocat, agrumes",
-                "price": "10€"
-            },
-            "plat": {
-                "name": "Pavé de lieu noir, beurre citronné, riz basmati aux herbes",
-                "price": "18€"
-            },
-            "dessert": {
-                "name": "Moelleux au chocolat, cœur coulant, crème anglaise",
-                "price": "9€"
-            },
-            "cocktail": {
-                "name": "Old Fashioned du Roi — Bourbon, angostura, zeste d'orange",
-                "price": "11€"
-            }
-        },
-        "formules": [
-            {
-                "name": "Menu Découverte",
-                "description": "Entrée + Plat du jour ou Plat + Dessert du jour",
-                "price": "19€",
-                "popular": false
-            },
-            {
-                "name": "Menu Royal",
-                "description": "Entrée + Plat + Dessert du jour",
-                "price": "26€",
-                "popular": true
-            },
-            {
-                "name": "Menu Complet",
-                "description": "Entrée + Plat + Dessert + Cocktail du jour",
-                "price": "34€",
-                "popular": false
-            }
-        ]
-    },
-    "menu_entrees": [
-        {
-            "category": "Les Entrées",
-            "icon": "fa-leaf",
-            "items": [
-                {
-                    "label": "Huîtres",
-                    "name": "Huîtres Normandes Creuses N°3 — Les 6",
-                    "price": "12,90€",
-                    "image": "https://images.unsplash.com/photo-1606859309981-2a6c5f27e2b9?w=600&q=80"
-                },
-                {
-                    "label": "Huîtres",
-                    "name": "Huîtres Normandes Creuses N°3 — Les 12",
-                    "price": "23,90€",
-                    "image": "https://images.unsplash.com/photo-1606859309981-2a6c5f27e2b9?w=600&q=80"
-                },
-                {
-                    "label": "Soupe",
-                    "name": "Velouté du Moment",
-                    "price": "9,90€",
-                    "image": "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&q=80"
-                },
-                {
-                    "label": "Saumon",
-                    "name": "Fines tranches de saumon fumé par nos soins, salade d'herbes fraîches, pain brioché tiédi & pickles",
-                    "price": "16,20€",
-                    "image": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600&q=80"
-                },
-                {
-                    "label": "Foie gras",
-                    "name": "Foie gras de Canard Maison & son chutney du jour, pain brioché toasté",
-                    "price": "19,20€",
-                    "image": "https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?w=600&q=80"
-                },
-                {
-                    "label": "Classique",
-                    "name": "Le Véritable Œuf Mayonnaise, condiments & pickles",
-                    "price": "7,90€",
-                    "image": "https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=600&q=80"
-                },
-                {
-                    "label": "Terrine",
-                    "name": "Terrine du Chef, condiments",
-                    "price": "8,90€",
-                    "image": "https://images.unsplash.com/photo-1555126634-323283e090fa?w=600&q=80"
-                },
-                {
-                    "label": "Maison",
-                    "name": "Nems \"Finger\" Maison, sucrine & menthe fraîche",
-                    "price": "8,90€",
-                    "image": "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=600&q=80"
-                }
-            ]
-        },
-        {
-            "category": "Nos Salades",
-            "icon": "fa-seedling",
-            "items": [
-                {
-                    "label": "Chèvre",
-                    "name": "La Chèvre Chaud — Salade, noix, toast de chèvre chaud rôti, tomates, figues fraîches, miel doux",
-                    "price": "18,00€",
-                    "image": "https://images.unsplash.com/photo-1550304943-4f24f54ddde9?w=600&q=80"
-                },
-                {
-                    "label": "Poulet",
-                    "name": "La Caesar Poulet — Salade, filet de poulet mariné, croûtons aillés, copeaux de parmesan, sauce César",
-                    "price": "17,50€",
-                    "image": "https://images.unsplash.com/photo-1512852939750-1305098529bf?w=600&q=80"
-                },
-                {
-                    "label": "Saumon",
-                    "name": "La Caesar Saumon — Salade, saumon, croûtons aillés, copeaux de parmesan, sauce César",
-                    "price": "18,50€",
-                    "image": "https://images.unsplash.com/photo-1551248429-40975aa4de74?w=600&q=80"
-                }
-            ]
-        },
-        {
-            "category": "Planches à Partager",
-            "icon": "fa-utensils",
-            "items": [
-                {
-                    "label": "Apéro",
-                    "name": "Flammekueche Gratinée — Fine pâte croustillante, lardons, oignons, crème fraîche, emmental",
-                    "price": "12,90€"
-                },
-                {
-                    "label": "Finger food",
-                    "name": "Planche Finger Food — Chicken wings, mozzarella sticks, jalapeños, onion rings (par 12 / par 24)",
-                    "price": "14€ / 26€"
-                },
-                {
-                    "label": "Mixte",
-                    "name": "Planche Taverne — Assortiment de charcuteries & fromages",
-                    "price": "20,90€"
-                },
-                {
-                    "label": "Charcuterie",
-                    "name": "Planche du Charcutier — Assortiment de charcuteries",
-                    "price": "19,90€"
-                },
-                {
-                    "label": "Fromage",
-                    "name": "Planche du Fromager — Assortiment de fromages",
-                    "price": "19,90€"
-                }
-            ]
-        }
+  "hero": {
+    "background_image": "/assets/images/hero_bg.png",
+    "logo": "/assets/images/logo_transparent.png",
+    "title_line1": "Royale par son nom,",
+    "title_line2": "unique par ses saveurs",
+    "subtitle": "Découvrez notre cuisine française savoureuse dans un cadre majestueux au cœur de Cergy-Port.",
+    "reservation_url": "https://reservation.dish.co/widget/hydra-e025b23d-362b-4d54-89ee-29dfd908bef2",
+    "reservation_text": "Réserver une table",
+    "menu_text": "Découvrir la carte"
+  },
+  "restaurant": {
+    "subtitle": "Restaurant Port Cergy – Cuisine française",
+    "title": "Brasserie La Taverne des Rois",
+    "paragraphs": [
+      "La Taverne des Rois, digne successeur de « La Taverne de Port Cergy », est un pub-brasserie qui a fait ses preuves et qui s'inscrit dans le patrimoine de Cergy-Port depuis maintenant 30 ans.",
+      "Situé sur les rives de l'Oise et dominant le charmant petit port de Cergy, le cadre est royal pour venir manger en famille ou encore pour prendre l'apéritif.",
+      "Poussez les portes de La Taverne des Rois et retrouvez la recette du bonheur. Vous profitez d'une ambiance chaleureuse et lounge, le tout saupoudrer d'une décoration particulièrement soignée dans les tons feutrés.",
+      "Afin de vous concocter les meilleurs plats, notre chef cuisinier travaille uniquement avec des produits frais et une viande racée soigneusement sélectionnée. Vous vous régalerez par exemple avec notre carte de burgers 100% maison et nos poissons frais livrés au quotidien."
     ],
-    "menu_plats": [
-        {
-            "category": "Les Burgers",
-            "icon": "fa-hamburger",
-            "subtitle": "Steaks hachés de bœuf frais, origine France (~150g), servis avec frites maison",
-            "items": [
-                {
-                    "label": "Classique",
-                    "name": "L'Original — Steak, tomate fraîche, salade, oignon rouge, sauce burger, cheddar",
-                    "price": "16,50€",
-                    "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=80"
-                },
-                {
-                    "label": "Signature",
-                    "name": "Le Signature — Effiloché de bœuf croustillant, oignons confits, salade, tomate, sauce tartare",
-                    "price": "18,90€",
-                    "image": "https://images.unsplash.com/photo-1550547660-d9450f859349?w=600&q=80"
-                },
-                {
-                    "label": "Premium",
-                    "name": "Le Burger des Rois — Steak, tomate, salade, oignon confit, gouda truffé",
-                    "price": "19,90€",
-                    "image": "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=600&q=80"
-                },
-                {
-                    "label": "Poulet",
-                    "name": "Le Chicken Burger — Filet de poulet pané, tomate, oignon confit, cheddar",
-                    "price": "16,00€",
-                    "image": "https://images.unsplash.com/photo-1521305916504-4a1121188589?w=600&q=80"
-                }
-            ]
-        },
-        {
-            "category": "Le Coin du Boucher",
-            "icon": "fa-drumstick-bite",
-            "subtitle": "Toutes nos viandes bovines sont d'origine française",
-            "items": [
-                {
-                    "label": "Bœuf",
-                    "name": "Entrecôte de Bœuf (~300g), frites maison & salade",
-                    "price": "27,60€",
-                    "image": "https://images.unsplash.com/photo-1588168333986-5078d3ae3976?w=600&q=80"
-                },
-                {
-                    "label": "Agneau",
-                    "name": "Souris d'Agneau Confite & son jus court, purée de patate douce au gingembre",
-                    "price": "22,90€",
-                    "image": "https://images.unsplash.com/photo-1514516345957-556ca7d90a29?w=600&q=80"
-                },
-                {
-                    "label": "Canard",
-                    "name": "Confit de Canard Maison, pommes grenailles sautées à l'ail et persil",
-                    "price": "21,80€",
-                    "image": "https://images.unsplash.com/photo-1518492104633-130d0cc84637?w=600&q=80"
-                },
-                {
-                    "label": "Tartare",
-                    "name": "Tartare de Bœuf Charolais (~180g) au couteau, préparé par nos soins, frites maison",
-                    "price": "18,50€",
-                    "image": "https://images.unsplash.com/photo-1588168333986-5078d3ae3976?w=600&q=80"
-                },
-                {
-                    "label": "Bœuf",
-                    "name": "Pavé de Cœur de Rumsteak (~180g), frites maison & salade",
-                    "price": "19,80€",
-                    "image": "https://images.unsplash.com/photo-1558030006-450675393462?w=600&q=80"
-                },
-                {
-                    "label": "Bœuf",
-                    "name": "Onglet de Bœuf (~180g) & son jus corsé, frites maison & salade",
-                    "price": "18,90€",
-                    "image": "https://images.unsplash.com/photo-1558030006-450675393462?w=600&q=80"
-                },
-                {
-                    "label": "Volaille",
-                    "name": "Suprême de Volaille & sa sauce poulette, cuisson basse température, légumes de saison",
-                    "price": "17,80€",
-                    "image": "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=600&q=80"
-                },
-                {
-                    "label": "Bœuf",
-                    "name": "Croustillant de Bœuf & sa sauce tartare, purée gourmande",
-                    "price": "18,90€",
-                    "image": "https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80"
-                },
-                {
-                    "label": "Porc",
-                    "name": "Andouillette rôtie aux oignons confits, frites maison",
-                    "price": "17,90€"
-                },
-                {
-                    "label": "Porc",
-                    "name": "Jarret braisé à la bière & sa sauce au poivre, frites maison",
-                    "price": "26,50€",
-                    "image": "https://images.unsplash.com/photo-1588168333986-5078d3ae3976?w=600&q=80"
-                }
-            ]
-        },
-        {
-            "category": "Les Poissons",
-            "icon": "fa-fish",
-            "items": [
-                {
-                    "label": "Cabillaud",
-                    "name": "Pavé de Cabillaud Nacré & son émulsion citronnelle, purée de patate douce au gingembre",
-                    "price": "23,00€",
-                    "image": "https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?w=600&q=80"
-                },
-                {
-                    "label": "Bar",
-                    "name": "Filet de Bar à la Plancha & son beurre nantais au curcuma, poêlée de blettes",
-                    "price": "18,90€",
-                    "image": "https://images.unsplash.com/photo-1534604973900-c43ab4c2e0ab?w=600&q=80"
-                },
-                {
-                    "label": "Fish & Chips",
-                    "name": "Fish & Chips Maison, frites & sauce tartare",
-                    "price": "19,90€",
-                    "image": "https://images.unsplash.com/photo-1579208030886-b1f5b7b4e8a3?w=600&q=80"
-                },
-                {
-                    "label": "Gambas",
-                    "name": "Risotto aux Gambas & sa bisque, herbes fraîches & tuiles de parmesan",
-                    "price": "19,90€",
-                    "image": "https://images.unsplash.com/photo-1633504581786-316c8002b1b9?w=600&q=80"
-                }
-            ]
-        },
-        {
-            "category": "Les Choucroutes",
-            "icon": "fa-beer",
-            "subtitle": "Travaillée, assaisonnée et préparée par nos cuisiniers chaque jour",
-            "items": [
-                {
-                    "label": "Classique",
-                    "name": "La Taverne — Saucisse de Francfort, saucisse fumée, poitrine fumée, saucisson à l'ail, PDT vapeur",
-                    "price": "21,90€"
-                },
-                {
-                    "label": "Porc",
-                    "name": "La Jarret — Jarret de porc, choucroute, pommes de terre vapeur",
-                    "price": "26,50€"
-                },
-                {
-                    "label": "Mer",
-                    "name": "La Choucroute de la Mer au Curcuma — Haddock, saumon, poisson blanc, moules, beurre nantais",
-                    "price": "27,90€"
-                }
-            ]
-        },
-        {
-            "category": "Les Pizzas",
-            "icon": "fa-pizza-slice",
-            "items": [
-                {
-                    "label": "Classique",
-                    "name": "La Reine — Sauce tomate, mozzarella, anchois, câpres, olives noires, origan",
-                    "price": "17,50€"
-                },
-                {
-                    "label": "Végé",
-                    "name": "La Végétarienne — Sauce tomate, mozzarella, tomate fraîche, poivrons, courgettes, aubergines",
-                    "price": "16,50€"
-                },
-                {
-                    "label": "Premium",
-                    "name": "La Parme — Sauce tomate, mozzarella, jambon cru, roquette, parmesan, balsamique",
-                    "price": "17,50€"
-                },
-                {
-                    "label": "Fromage",
-                    "name": "La Quatro Fromagi — Gorgonzola, chèvre, mozzarella, camembert",
-                    "price": "17,00€"
-                }
-            ]
-        },
-        {
-            "category": "Autour du Monde",
-            "icon": "fa-globe-asia",
-            "items": [
-                {
-                    "label": "Gambas",
-                    "name": "Wok de Gambas — Légumes croquants au wok, soja, gingembre, coriandre, sésame",
-                    "price": "20,90€"
-                },
-                {
-                    "label": "Poulet",
-                    "name": "Wok de Poulet — Légumes croquants au wok, soja, gingembre, coriandre, sésame",
-                    "price": "19,90€"
-                },
-                {
-                    "label": "Végé",
-                    "name": "Wok Végétarien — Légumes croquants au wok, coriandre, ail, sésame",
-                    "price": "18,90€"
-                },
-                {
-                    "label": "Thaï",
-                    "name": "Linguine de Bœuf façon Thaï — Linguine, émincé de bœuf, carottes, courgettes, soja, sésame",
-                    "price": "19,30€"
-                }
-            ]
-        }
-    ],
-    "menu_desserts": [
-        {
-            "category": "Les Desserts Classiques",
-            "icon": "fa-birthday-cake",
-            "items": [
-                {
-                    "label": "Fromage",
-                    "name": "Assiette du Fromager — Brie truffé, tomme de Savoie, St Maure de Touraine",
-                    "price": "8,90€",
-                    "image": "https://images.unsplash.com/photo-1452195100486-9cc805987862?w=600&q=80"
-                },
-                {
-                    "label": "Exotique",
-                    "name": "Crumble des Îles — Saveur passion avec morceaux de mangue & glace coco",
-                    "price": "8,90€",
-                    "image": "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&q=80"
-                },
-                {
-                    "label": "Maison",
-                    "name": "Paris Brest Maison — Chou, crème pralinée & éclats de noisettes",
-                    "price": "8,90€",
-                    "image": "https://images.unsplash.com/photo-1612203985729-70726954388c?w=600&q=80"
-                },
-                {
-                    "label": "Maison",
-                    "name": "Tarte Tatin Maison, crème fraîche",
-                    "price": "8,90€",
-                    "image": "https://images.unsplash.com/photo-1562007908-17c67e878c88?w=600&q=80"
-                },
-                {
-                    "label": "Maison",
-                    "name": "Crème Brûlée Maison à la cassonade",
-                    "price": "8,90€",
-                    "image": "https://images.unsplash.com/photo-1470124182917-cc6e71b22ecc?w=600&q=80"
-                },
-                {
-                    "label": "Maison",
-                    "name": "Tiramisu du Moment",
-                    "price": "8,90€",
-                    "image": "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=600&q=80"
-                },
-                {
-                    "label": "Maison",
-                    "name": "Clafoutis aux Pommes & Noix de Pécan, glace vanille & caramel beurre salé",
-                    "price": "8,90€"
-                },
-                {
-                    "label": "Chef",
-                    "name": "L'Incroyable Pain Perdu du Chef, glace vanille & caramel beurre salé",
-                    "price": "8,90€",
-                    "image": "https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=600&q=80"
-                },
-                {
-                    "label": "Classique",
-                    "name": "Profiteroles au Chocolat, crème anglaise",
-                    "price": "8,90€",
-                    "image": "https://images.unsplash.com/photo-1586040140378-b5634cb4c8fc?w=600&q=80"
-                }
-            ]
-        },
-        {
-            "category": "Les Coupes Glacées",
-            "icon": "fa-ice-cream",
-            "items": [
-                {
-                    "label": "Classique",
-                    "name": "Dame Blanche — 3 boules vanille, sauce chocolat chaud, crème fouettée",
-                    "price": "8,90€"
-                },
-                {
-                    "label": "Liégeois",
-                    "name": "Chocolat ou Café ou Caramel Liégeois, crème fouettée",
-                    "price": "8,90€"
-                },
-                {
-                    "label": "Gourmand",
-                    "name": "Coupe façon Bounty® — Sorbet cacao, crème glacée coco, chocolat chaud, coco râpée",
-                    "price": "8,90€"
-                },
-                {
-                    "label": "Gourmand",
-                    "name": "Coupe Vertige — Glacée pistache, menthe chocolat, chocolat chaud, cacahuètes",
-                    "price": "8,90€"
-                },
-                {
-                    "label": "Gourmand",
-                    "name": "Coupe façon Snickers® — Glacée cacahuète chocolat, vanille, caramel fleur de sel",
-                    "price": "9,10€"
-                },
-                {
-                    "label": "Alcool",
-                    "name": "L'After Eight — Menthe chocolat, chocolat noir, Get 27",
-                    "price": "9,20€"
-                },
-                {
-                    "label": "Alcool",
-                    "name": "Colonel — 2 boules sorbet citron, vodka",
-                    "price": "8,90€"
-                },
-                {
-                    "label": "Alcool",
-                    "name": "Piña Colada Glacée — Sorbet ananas, coco, rhum blanc agricole",
-                    "price": "8,90€"
-                }
-            ]
-        },
-        {
-            "category": "Crêpes & Gourmands",
-            "icon": "fa-cookie",
-            "items": [
-                {
-                    "label": "Crêpe",
-                    "name": "Crêpe au Sucre",
-                    "price": "5,50€"
-                },
-                {
-                    "label": "Crêpe",
-                    "name": "Crêpe Nutella® ou Chocolat ou Caramel",
-                    "price": "7,00€"
-                },
-                {
-                    "label": "Crêpe",
-                    "name": "Crêpe Nutella® ou Chocolat / Banane",
-                    "price": "8,00€"
-                },
-                {
-                    "label": "Gourmand",
-                    "name": "Café Gourmand",
-                    "price": "9,50€"
-                },
-                {
-                    "label": "Gourmand",
-                    "name": "Thé Gourmand",
-                    "price": "9,50€"
-                },
-                {
-                    "label": "Gourmand",
-                    "name": "Chocolat Gourmand",
-                    "price": "9,50€"
-                },
-                {
-                    "label": "Gourmand",
-                    "name": "Irish Coffee Gourmand",
-                    "price": "13,20€"
-                }
-            ]
-        }
-    ],
-    "menu_boissons": [
-        {
-            "category": "Les Mojitos",
-            "icon": "fa-cocktail",
-            "items": [
-                {
-                    "label": "Classique",
-                    "name": "Mojito — Rhum, citron vert, cassonade, menthe, Perrier",
-                    "price": "9,90€"
-                },
-                {
-                    "label": "Fruité",
-                    "name": "Mojito Framboise — Rhum, citron vert, velours framboise, menthe",
-                    "price": "11,00€"
-                },
-                {
-                    "label": "Fruité",
-                    "name": "Mojito Passion — Rhum, citron vert, velours passion, menthe",
-                    "price": "11,00€"
-                },
-                {
-                    "label": "Premium",
-                    "name": "Mojito Royal — Rhum, citron vert, cassonade, menthe, Prosecco",
-                    "price": "11,90€"
-                }
-            ]
-        },
-        {
-            "category": "Nos Spritz",
-            "icon": "fa-glass-cheers",
-            "items": [
-                {
-                    "label": "Classique",
-                    "name": "Le Classique — Aperitivo, Prosecco, Perrier",
-                    "price": "8,90€"
-                },
-                {
-                    "label": "Premium",
-                    "name": "Premium Spritz Limoncello — Limoncello, Prosecco, Perrier",
-                    "price": "9,30€"
-                },
-                {
-                    "label": "Premium",
-                    "name": "Premium Spritz Saint Germain — Liqueur St Germain, Prosecco, Perrier",
-                    "price": "10,90€"
-                }
-            ]
-        },
-        {
-            "category": "Cocktails Signature",
-            "icon": "fa-magic",
-            "items": [
-                {
-                    "label": "Signature",
-                    "name": "Le Fantasme — Gin, velours de passion, liqueur St Germain, citron",
-                    "price": "9,80€"
-                },
-                {
-                    "label": "Signature",
-                    "name": "Bombay Sapphire & Tonic — Gin Bombay Sapphire, citron vert, Schweppes",
-                    "price": "9,90€"
-                },
-                {
-                    "label": "Signature",
-                    "name": "Chaleur Tropicale — Rhum, Malibu, Ginger Beer, velours passion",
-                    "price": "9,60€"
-                },
-                {
-                    "label": "Signature",
-                    "name": "Banana Forever — Malibu, Soho, purée de banane, jus d'ananas",
-                    "price": "9,80€"
-                }
-            ]
-        },
-        {
-            "category": "La Cave — Vins Rouges",
-            "icon": "fa-wine-glass-alt",
-            "items": [
-                {
-                    "label": "Loire",
-                    "name": "Saumur AOP — Cabernet Franc \"Les Plantagenêts\"",
-                    "price": "25,00€"
-                },
-                {
-                    "label": "Languedoc",
-                    "name": "Pic Saint-Loup AOP — \"Altitude 192 - Terre Haute\"",
-                    "price": "32,80€"
-                },
-                {
-                    "label": "Beaujolais",
-                    "name": "Brouilly AOC — \"Château des Tours\"",
-                    "price": "30,90€"
-                },
-                {
-                    "label": "Bordeaux",
-                    "name": "Haut-Médoc AOC — \"Château Victoria\"",
-                    "price": "32,90€"
-                },
-                {
-                    "label": "Bordeaux",
-                    "name": "Montagne Saint-Émilion AOC — \"Château Bel-Air\"",
-                    "price": "29,90€"
-                },
-                {
-                    "label": "Bordeaux",
-                    "name": "Saint-Estèphe AOC — \"Château Rocher Coutelin\"",
-                    "price": "49,00€"
-                }
-            ]
-        },
-        {
-            "category": "Vins Blancs & Rosés",
-            "icon": "fa-wine-bottle",
-            "items": [
-                {
-                    "label": "Bourgogne",
-                    "name": "Bourgogne Blanc Aligoté AOC — \"Les Planchants\"",
-                    "price": "28,90€"
-                },
-                {
-                    "label": "Bourgogne",
-                    "name": "Chablis AOP — \"Famille Gueguen\"",
-                    "price": "41,00€"
-                },
-                {
-                    "label": "Alsace",
-                    "name": "Riesling AOC — \"Hans Schaeffer\"",
-                    "price": "25,00€"
-                },
-                {
-                    "label": "Alsace",
-                    "name": "Gewurztraminer AOC — \"Hans Schaeffer\"",
-                    "price": "32,90€"
-                },
-                {
-                    "label": "Rosé",
-                    "name": "Côtes de Provence AOC — \"Soif de Pampa\"",
-                    "price": "27,90€"
-                },
-                {
-                    "label": "Rosé",
-                    "name": "Côte de Provence AOC — \"Minuty Prestige\"",
-                    "price": "44,90€"
-                }
-            ]
-        },
-        {
-            "category": "Champagnes & Effervescents",
-            "icon": "fa-star",
-            "items": [
-                {
-                    "label": "Prosecco",
-                    "name": "Prosecco Extra Dry (verre / bouteille)",
-                    "price": "5,90€ / 32,90€"
-                },
-                {
-                    "label": "Champagne",
-                    "name": "Champagne Sélection Maison (verre / bouteille)",
-                    "price": "9€ / 55€"
-                },
-                {
-                    "label": "Prestige",
-                    "name": "R de Ruinart",
-                    "price": "150,00€"
-                }
-            ]
-        }
-    ],
-    "footer": {
-        "description": "Au cœur de Cergy-Port, La Taverne des Rois est un lieu unique avec un charme incomparable.",
-        "facebook_url": "https://www.facebook.com/latavernedesrois",
-        "instagram_url": "https://www.instagram.com/latavernedesroiscergy",
-        "address": "18 Quai de la Tourelle, 95000 CERGY",
-        "phone": "01 34 24 90 96",
-        "copyright": "© 2025 La Taverne des Rois. Tous droits réservés."
+    "image": "/assets/images/restaurant_interior.jpg"
+  },
+  "gallery": {
+    "subtitle": "Parce qu'une image vaut mille mots",
+    "title": "Notre Galerie",
+    "description": "Un spectacle aussi bien en cuisine qu'en salle !",
+    "images": [
+      {
+        "src": "/assets/images/gallery_capaccio.png",
+        "alt": "Carpaccio de bœuf, roquette et parmesan"
+      },
+      {
+        "src": "/assets/images/gallery_burger_real.jpg",
+        "alt": "Burger maison et frites"
+      },
+      {
+        "src": "/assets/images/gallery_burrata.png",
+        "alt": "Burrata, tomates cerises et basilic"
+      },
+      {
+        "src": "/assets/images/gallery_mocktails.png",
+        "alt": "Cocktails frais à la menthe"
+      },
+      {
+        "src": "/assets/images/gallery_terrasse.png",
+        "alt": "Terrasse d'été en bord de l'Oise"
+      },
+      {
+        "src": "/assets/images/gallery_dorade.png",
+        "alt": "Dorade grillée, légumes de saison"
+      },
+      {
+        "src": "/assets/images/cms/img_1788083093394_7ytmyg.jpg",
+        "alt": "Intérieur chaleureux du restaurant"
+      },
+      {
+        "src": "/assets/images/gallery_salade_melon.png",
+        "alt": "Salade melon, jambon cru et burrata"
+      },
+      {
+        "src": "/assets/images/gallery_mocktail.png",
+        "alt": "Mocktail artisanal"
+      }
+    ]
+  },
+  "actualites": {
+    "subtitle": "Découvrez tous nos événements à venir !",
+    "title": "Actualités & Événements",
+    "description": "Mixez plaisir culinaire et animations ! Retransmissions en live sur écrans géants, dîner-spectacle, concert et DJ set.",
+    "events": [
+      {
+        "image": "/assets/images/cocktail_1.png",
+        "date_day": "14",
+        "date_month": "Mar",
+        "title": "Soirée DJ Set & Cocktails",
+        "description": "Venez profiter d'une ambiance lounge et de nos cocktails signatures avec notre DJ résident pour bien commencer le week-end."
+      },
+      {
+        "image": "/assets/images/diner_spectacle.png",
+        "date_day": "21",
+        "date_month": "Mar",
+        "title": "Dîner-Spectacle Live Music",
+        "description": "Savourez notre nouveau menu de printemps en profitant d'un concert live du groupe \"Funky Train\" toute la soirée."
+      },
+      {
+        "image": "/assets/images/champions_league.png",
+        "date_day": "28",
+        "date_month": "Mar",
+        "title": "Soirée Champions League",
+        "description": "Retransmission en direct du match sur écrans géants ! Menu spécial Burger & Bière disponible pour l'événement."
+      }
+    ]
+  },
+  "menu_plat_du_jour": {
+    "midi": {},
+    "soir": {},
+    "formules": [
+      {
+        "name": "Menu Découverte",
+        "description": "Entrée + Plat du jour ou Plat + Dessert du jour",
+        "price": "19€",
+        "popular": false
+      },
+      {
+        "name": "Menu Royal",
+        "description": "Entrée + Plat + Dessert du jour",
+        "price": "26€",
+        "popular": true
+      },
+      {
+        "name": "Menu Complet",
+        "description": "Entrée + Plat + Dessert + Cocktail du jour",
+        "price": "34€",
+        "popular": false
+      }
+    ]
+  },
+  "footer": {
+    "description": "Au cœur de Cergy-Port, La Taverne des Rois est un lieu unique avec un charme incomparable.",
+    "facebook_url": "https://www.facebook.com/latavernedesrois",
+    "instagram_url": "https://www.instagram.com/latavernedesroiscergy",
+    "address": "18 Quai de la Tourelle, 95000 CERGY",
+    "phone": "01 34 24 90 96",
+    "copyright": "© 2025 La Taverne des Rois. Tous droits réservés."
+  },
+  "links": {
+    "nav-desktop-1": {
+      "text": "Restaurant",
+      "href": "#restaurant",
+      "modalClass": ""
+    },
+    "nav-desktop-2": {
+      "text": "La carte",
+      "href": "https://latavernedesrois.fr/wp-content/uploads/2025/02/Menu-25x33-AH-2025-1.pdf",
+      "modalClass": ""
+    },
+    "nav-desktop-3": {
+      "text": "Galerie",
+      "href": "#galerie",
+      "modalClass": ""
+    },
+    "nav-desktop-btn": {
+      "text": "Réservation",
+      "href": "#",
+      "modalClass": ""
+    },
+    "nav-mobile-1": {
+      "text": "Restaurant",
+      "href": "#restaurant",
+      "modalClass": ""
+    },
+    "nav-mobile-2": {
+      "text": "La carte",
+      "href": "https://latavernedesrois.fr/wp-content/uploads/2025/02/Menu-25x33-AH-2025-1.pdf",
+      "modalClass": ""
+    },
+    "nav-mobile-3": {
+      "text": "Galerie",
+      "href": "#galerie",
+      "modalClass": ""
+    },
+    "nav-mobile-btn": {
+      "text": "Réservation",
+      "href": "#",
+      "modalClass": ""
+    },
+    "hero-btn-1": {
+      "text": "Réserver une table",
+      "href": "#",
+      "modalClass": ""
+    },
+    "hero-btn-2": {
+      "text": "Découvrir la carte",
+      "href": "https://latavernedesrois.fr/wp-content/uploads/2025/02/Menu-25x33-AH-2025-1.pdf",
+      "modalClass": ""
+    },
+    "footer-link-1": {
+      "text": "Restaurant",
+      "href": "#restaurant",
+      "modalClass": ""
+    },
+    "footer-link-2": {
+      "text": "La carte",
+      "href": "https://latavernedesrois.fr/wp-content/uploads/2025/02/Menu-25x33-AH-2025-1.pdf",
+      "modalClass": ""
+    },
+    "footer-link-3": {
+      "text": "Galerie",
+      "href": "#galerie",
+      "modalClass": ""
+    },
+    "footer-link-4": {
+      "text": "Mentions légales",
+      "href": "#",
+      "modalClass": ""
+    },
+    "footer-link-5": {
+      "text": "Données personnelles",
+      "href": "#",
+      "modalClass": ""
     }
+  }
 }
