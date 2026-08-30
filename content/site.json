@@ -26,28 +26,40 @@
         "description": "Un spectacle aussi bien en cuisine qu'en salle !",
         "images": [
             {
-                "src": "/assets/images/gallery_seafood.png",
-                "alt": "Plateau de fruits de mer"
+                "src": "/assets/images/gallery_capaccio.png",
+                "alt": "Carpaccio de bœuf, roquette et parmesan"
             },
             {
-                "src": "/assets/images/gallery_burger.png",
-                "alt": "Burger Gourmet"
+                "src": "/assets/images/gallery_burger_real.jpg",
+                "alt": "Burger maison et frites"
             },
             {
-                "src": "/assets/images/gallery_dessert.png",
-                "alt": "Dessert Chocolat"
+                "src": "/assets/images/gallery_burrata.png",
+                "alt": "Burrata, tomates cerises et basilic"
             },
             {
-                "src": "/assets/images/cocktail_1.png",
-                "alt": "Cocktail élégant"
+                "src": "/assets/images/gallery_mocktails.png",
+                "alt": "Cocktails frais à la menthe"
             },
             {
-                "src": "/assets/images/hero_bg.png",
-                "alt": "Intérieur du restaurant"
+                "src": "/assets/images/gallery_terrasse.png",
+                "alt": "Terrasse d'été en bord de l'Oise"
             },
             {
-                "src": "/assets/images/dish_1.png",
-                "alt": "Plat Gourmet"
+                "src": "/assets/images/gallery_dorade.png",
+                "alt": "Dorade grillée, légumes de saison"
+            },
+            {
+                "src": "/assets/images/gallery_interieur.jpg",
+                "alt": "Intérieur chaleureux du restaurant"
+            },
+            {
+                "src": "/assets/images/gallery_salade_melon.png",
+                "alt": "Salade melon, jambon cru et burrata"
+            },
+            {
+                "src": "/assets/images/gallery_mocktail.png",
+                "alt": "Mocktail artisanal"
             }
         ]
     },
