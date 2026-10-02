@@ -131,7 +131,7 @@
     },
     "nav-desktop-2": {
       "text": "La carte",
-      "href": "/assets/menu-la-taverne-des-rois.pdf",
+      "href": "https://latavernedesrois.fr/wp-content/uploads/2025/02/Menu-25x33-AH-2025-1.pdf",
       "modalClass": ""
     },
     "nav-desktop-3": {
@@ -151,7 +151,7 @@
     },
     "nav-mobile-2": {
       "text": "La carte",
-      "href": "/assets/menu-la-taverne-des-rois.pdf",
+      "href": "https://latavernedesrois.fr/wp-content/uploads/2025/02/Menu-25x33-AH-2025-1.pdf",
       "modalClass": ""
     },
     "nav-mobile-3": {
@@ -171,7 +171,7 @@
     },
     "hero-btn-2": {
       "text": "Découvrir la carte",
-      "href": "/assets/menu-la-taverne-des-rois.pdf",
+      "href": "https://latavernedesrois.fr/wp-content/uploads/2025/02/Menu-25x33-AH-2025-1.pdf",
       "modalClass": ""
     },
     "footer-link-1": {
@@ -181,7 +181,7 @@
     },
     "footer-link-2": {
       "text": "La carte",
-      "href": "/assets/menu-la-taverne-des-rois.pdf",
+      "href": "https://latavernedesrois.fr/wp-content/uploads/2025/02/Menu-25x33-AH-2025-1.pdf",
       "modalClass": ""
     },
     "footer-link-3": {
