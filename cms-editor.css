@@ -164,6 +164,23 @@
     transition: all 0.2s;
 }
 
+.cms-btn-menu {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #fff;
+}
+
+.cms-btn-menu:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.cms-btn-menu:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
 .cms-btn-save {
     background: linear-gradient(135deg, #10b981, #059669);
     color: #fff;

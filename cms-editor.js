@@ -16,6 +16,10 @@
     const GITHUB_OWNER = 'pernetraphael115-art';
     const GITHUB_REPO = 'La-Taverne-des-Rois';
     const GITHUB_IMAGES_PATH = 'assets/images/cms';
+    const MENU_PDF_PATHS = [
+        'wp-content/uploads/2025/02/Menu-25x33-AH-2025-1.pdf',
+        'assets/menu-la-taverne-des-rois.pdf'
+    ];
 
     // ==============================
     // STATE
@@ -34,6 +38,7 @@
         injectToast();
         injectItemEditor();
         injectImageInput();
+        injectPdfInput();
 
         // Secret trigger: double-click on copyright
         const copyright = document.querySelector('.footer-bottom');
@@ -120,6 +125,9 @@
                 <span class="cms-toolbar-text">Cliquez sur un élément pour le modifier</span>
             </div>
             <div class="cms-toolbar-right">
+                <button class="cms-toolbar-btn cms-btn-menu" id="cms-menu-pdf-btn">
+                    <i class="fas fa-utensils"></i> Changer la carte
+                </button>
                 <button class="cms-toolbar-btn cms-btn-save" id="cms-save-btn" disabled>
                     <i class="fas fa-save"></i> Publier en ligne
                 </button>
@@ -131,6 +139,7 @@
         document.body.insertAdjacentHTML('beforeend', html);
 
         document.getElementById('cms-save-btn').addEventListener('click', saveContent);
+        document.getElementById('cms-menu-pdf-btn').addEventListener('click', () => document.getElementById('cms-pdf-input').click());
         document.getElementById('cms-exit-btn').addEventListener('click', exitEditMode);
     }
 
@@ -228,6 +237,127 @@
             reader.readAsDataURL(file);
             input.value = '';
         });
+    }
+
+    // ==============================
+    // HIDDEN PDF INPUT (for menu card upload)
+    // ==============================
+    function injectPdfInput() {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'application/pdf';
+        input.id = 'cms-pdf-input';
+        input.style.display = 'none';
+        document.body.appendChild(input);
+
+        input.addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            if (file.type !== 'application/pdf') {
+                showToast('⚠️ Veuillez sélectionner un fichier PDF.', 'error');
+                return;
+            }
+            if (file.size > 20 * 1024 * 1024) {
+                showToast('⚠️ Le fichier est trop volumineux (max 20 Mo).', 'error');
+                return;
+            }
+            await uploadMenuPDF(file);
+            input.value = '';
+        });
+    }
+
+    async function uploadMenuPDF(file) {
+        const btn = document.getElementById('cms-menu-pdf-btn');
+        const originalHTML = btn.innerHTML;
+        btn.disabled = true;
+
+        try {
+            // Step 1: Get GitHub token
+            let ghToken = localStorage.getItem('cms_gh_token');
+            if (!ghToken) {
+                ghToken = prompt(
+                    "🔑 Entrez votre clé secrète GitHub (Personal Access Token) pour publier la nouvelle carte.\n\n" +
+                    "Cette clé sera mémorisée dans votre navigateur."
+                );
+                if (!ghToken) {
+                    showToast('⚠️ Upload annulé — aucune clé fournie.', 'error');
+                    btn.disabled = false;
+                    btn.innerHTML = originalHTML;
+                    return;
+                }
+                localStorage.setItem('cms_gh_token', ghToken);
+            }
+
+            // Step 2: Read file as base64
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Lecture...';
+            const base64Content = await new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result.split(',')[1]);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+
+            // Step 3: Upload to both PDF paths on GitHub
+            for (let i = 0; i < MENU_PDF_PATHS.length; i++) {
+                const filePath = MENU_PDF_PATHS[i];
+                btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Upload ${i + 1}/${MENU_PDF_PATHS.length}...`;
+
+                const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${filePath}`;
+
+                // Get current file SHA (needed for update)
+                let sha = null;
+                const getRes = await fetch(apiUrl, {
+                    headers: { 'Authorization': `Bearer ${ghToken}` }
+                });
+                if (getRes.ok) {
+                    const fileData = await getRes.json();
+                    sha = fileData.sha;
+                } else if (getRes.status === 401 || getRes.status === 403) {
+                    localStorage.removeItem('cms_gh_token');
+                    throw new Error('Clé GitHub invalide ou expirée.');
+                }
+
+                // Upload new PDF
+                const putData = {
+                    message: `Mise à jour de la carte (${new Date().toLocaleDateString('fr-FR')})`,
+                    content: base64Content
+                };
+                if (sha) putData.sha = sha;
+
+                const putRes = await fetch(apiUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${ghToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(putData)
+                });
+
+                if (!putRes.ok) {
+                    if (putRes.status === 401 || putRes.status === 403) {
+                        localStorage.removeItem('cms_gh_token');
+                        throw new Error('Clé GitHub invalide ou permissions insuffisantes.');
+                    }
+                    const errData = await putRes.json();
+                    throw new Error(`Erreur upload: ${errData.message || putRes.statusText}`);
+                }
+            }
+
+            // Step 4: Success
+            btn.innerHTML = '<i class="fas fa-check"></i> Carte mise à jour !';
+            showToast('✅ Nouvelle carte publiée ! Elle sera visible par tous dans ~30 secondes.', 'success');
+
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.innerHTML = originalHTML;
+            }, 4000);
+
+        } catch (err) {
+            console.error('PDF upload error:', err);
+            showToast(`❌ Erreur : ${err.message}`, 'error');
+            btn.disabled = false;
+            btn.innerHTML = originalHTML;
+        }
     }
 
     function openImagePicker(callback) {
